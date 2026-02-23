@@ -1,0 +1,129 @@
+# ============================================
+# BPR Intelligence Deliverables — Execution Plan
+#
+# Project-specific execution plan for Epic BPR.
+# References the epic-orchestration workflow template.
+#
+# @version 1.0.0
+# @created 2026-02-22
+# @author @pm (retroactive integration)
+# ============================================
+
+execution_plan:
+  epicId: EPIC-BPR
+  epicTitle: "BPR Intelligence Deliverables"
+  template: epic-orchestration
+  mode: interactive
+  status: in_progress
+
+  config:
+    epicIndex: "docs/stories/epics/epic-bpr-deliverables/EPIC-BPR-INDEX.md"
+    storyBasePath: "docs/stories"
+    maxConcurrency: 2
+    worktreeIsolation: false  # Simple document generation project
+
+  waves:
+    - wave: 1
+      name: "Foundation"
+      status: done
+      parallel: false
+      gate_agent: "@architect"
+      stories:
+        - id: "1.1"
+          file: "1.1.environment-setup.story.md"
+          executor: "@dev"
+          quality_gate: "@architect"
+          status: done
+
+    - wave: 2
+      name: "Extraction"
+      status: done
+      parallel: false
+      gate_agent: "@architect"
+      stories:
+        - id: "1.2"
+          file: "1.2.source-document-extraction.story.md"
+          executor: "@dev"
+          quality_gate: "@architect"
+          status: done
+
+    - wave: 3
+      name: "Deliverables"
+      status: done
+      parallel: true
+      gate_agent: "@architect"
+      stories:
+        - id: "1.3"
+          file: "1.3.docx-consulting-book.story.md"
+          executor: "@dev"
+          quality_gate: "@architect"
+          status: done
+        - id: "1.4"
+          file: "1.4.html-executive-showcase.story.md"
+          executor: "@dev"
+          quality_gate: "@architect"
+          status: done
+
+    - wave: 4
+      name: "Refinements"
+      status: done
+      parallel: false
+      gate_agent: "@qa"
+      stories:
+        - id: "1.5"
+          file: "1.5.docx-expansion-80-pages.story.md"
+          executor: "@dev"
+          quality_gate: "@qa"
+          status: done
+        - id: "1.6"
+          file: "1.6.pricing-tiers-integration.story.md"
+          executor: "@dev"
+          quality_gate: "@qa"
+          status: done
+
+    - wave: 5
+      name: "Quality"
+      status: done
+      parallel: false
+      gate_agent: "@architect"
+      stories:
+        - id: "1.7"
+          file: "1.7.quality-verification.story.md"
+          executor: "@qa"
+          quality_gate: "@architect"
+          status: done
+
+    - wave: 6
+      name: "Final Fixes"
+      status: ready
+      parallel: true
+      gate_agent: "@qa"
+      stories:
+        - id: "1.8"
+          file: "1.8.html-accessibility-fixes.story.md"
+          executor: "@dev"
+          quality_gate: "@architect"
+          status: ready
+          blocker: "Requires real WhatsApp number from project owner"
+        - id: "1.9"
+          file: "1.9.docx-page-count-verification.story.md"
+          executor: "@dev"
+          quality_gate: "@qa"
+          status: ready
+
+  summary:
+    total_stories: 9
+    done: 7
+    ready: 2
+    in_progress: 0
+    blocked: 1  # Story 1.8 partially blocked (WhatsApp number)
+    completion_percentage: 78
+
+metadata:
+  created: "2026-02-22"
+  author: "@pm (retroactive)"
+  version: "1.0.0"
+  notes: >-
+    Execution plan created retroactively to integrate existing BPR Intelligence
+    project work into the AIOS framework. Waves 1-5 already completed
+    in pre-AIOS sessions. Wave 6 pending execution.
