@@ -320,7 +320,7 @@ function buildCoverPage() {
     new Paragraph({
       alignment: AlignmentType.CENTER,
       children: [
-        new TextRun({ text: 'R$ 4,2 Bilhões', font: FONTS.mono, size: PT(20), color: COLORS.gold, bold: true }),
+        new TextRun({ text: 'R$ 1,6 Bi / quadrimestre', font: FONTS.mono, size: PT(20), color: COLORS.gold, bold: true }),
       ],
     }),
     new Paragraph({
@@ -385,11 +385,11 @@ function buildSectionI() {
   return [
     ...createSectionHeader('I', 'Executive Summary', 'O Paradoxo do Luxo Escalável e a Arquitetura do "Augmented Advisory"'),
 
-    createBody('O mercado imobiliário de ultra-alto padrão da Barra da Tijuca — ecossistema que movimenta anualmente mais de R$ 4,2 bilhões em transações residenciais acima de R$ 5 milhões — opera sob uma contradição estrutural que permaneceu intocada por décadas: a demanda por hiper-personalização e discrição absoluta colide frontalmente com a natureza artesanal, não escalável e intuitiva da intermediação tradicional.'),
+    createBody('O mercado imobiliário de ultra-alto padrão da Barra da Tijuca — ecossistema que movimentou R$ 1,6 bilhão apenas no primeiro quadrimestre de 2025 — cerca de um terço de todo o mercado carioca (ABRAINC 2025), com o segmento de luxo crescendo 75% em VGV — opera sob uma contradição estrutural que permaneceu intocada por décadas: a demanda por hiper-personalização e discrição absoluta colide frontalmente com a natureza artesanal, não escalável e intuitiva da intermediação tradicional.'),
 
     createBody('Enquanto o cliente moderno de high-net-worth (HNWI) espera precisão cirúrgica, velocidade comparável à execução de ordens em bolsas de valores e counsel patrimonial integrado, o modelo vigente ainda depende de planilhas Excel desatualizadas, agendas de visitas turísticas improdutivas, e decisões baseadas exclusivamente na experiência individual do corretor — um ativo humano finito, suscetível a vieses cognitivos e impossibilitado de processar a complexidade crescente de dados que determinam o verdadeiro valor de um ativo imobiliário de luxo.'),
 
-    createHighlightBox('O Custo da Oposição: o comprador de elite desperdiça, em média, 120 horas executivas (equivalente a R$ 50 mil em custo de oportunidade) e tolera uma taxa de erro de 40% na curadoria de ativos, resultando em aquisições subótimas ou desistência por exaustão.'),
+    createHighlightBox('O Custo da Oposição: o comprador de elite enfrenta ciclos de busca de 10+ semanas (NAR 2025), com imóveis de luxo permanecendo em média 319 dias no mercado (Concierge Auctions 2024) — consumindo tempo executivo avaliado entre R$ 400-600/hora (Page Executive 2024) — sendo que 56% dos compradores identificam encontrar o imóvel certo como o aspecto mais difícil da aquisição (NAR 2025), e transações sem representação exclusiva resultam em sobrepreço médio de 9-17% (Ridgestone Property 2025 / Bright MLS-Drexel University 2023).'),
 
     createBody('A BPR Intelligence foi concebida para preencher exatamente este vácuo. Diferentemente de proptechs tradicionais que focam em volume e escala horizontal, a BPR adota uma estratégia de profundidade vertical: dominar um único mercado geográfico (Barra da Tijuca), um único segmento de preço (acima de R$ 5 milhões), e uma única persona (HNWI — High Net Worth Individuals com patrimônio líquido acima de R$ 30 milhões). Esta hiperespecialização permite construir vantagens competitivas compostas — dados proprietários, relacionamentos exclusivos, e algoritmos calibrados para um universo finito de ativos — que se tornam exponencialmente mais difíceis de replicar com o tempo.'),
 
@@ -421,7 +421,7 @@ function buildSectionI() {
         ['EBITDA Ano 1', '15%', '22%'],
         ['Receita Ano 3', 'R$ 23 MM', 'R$ 35 MM'],
         ['EBITDA Ano 3', '35%', '42%'],
-        ['LTV/CAC Ratio', '8-18:1 (cenário base-otimista)', '15-24:1'],
+        ['LTV/CAC Ratio', '5-8:1 (benchmark setor: 3-4:1, Phoenix Strategy Group 2025)', '8-12:1'],
         ['Payback do Cliente', '3 meses', '2 meses'],
         ['LTV Médio (5 anos)', 'R$ 450k', 'R$ 680k'],
       ],
@@ -454,22 +454,22 @@ function buildSectionII() {
 
     createBody('A análise que se segue é fruto de 24 meses de imersão operacional, mais de 200 entrevistas com compradores HNWI, corretores, síndicos e advogados especializados, e a modelagem quantitativa de mais de 3.000 transações no Quadrilátero de Ouro (Península, Monde, Riserva Golf e Mansões). O diagnóstico revela um padrão consistente: o comprador de imóvel de luxo no Brasil enfrenta um paradoxo — quanto mais sofisticado é o ativo, mais primitivo é o processo de aquisição. Um executivo que usa algoritmos para gerenciar um portfólio de R$ 50 milhões na bolsa é forçado a confiar em intuição e indicações pessoais para uma decisão de R$ 10 milhões em imóvel.'),
 
-    createBody('O mercado imobiliário de ultra-alto padrão da Barra da Tijuca (ticket médio R$ 5MM–20MM) movimenta anualmente mais de R$ 4,2 bilhões em transações residenciais. Trata-se de um dos mercados mais concentrados do Brasil: apenas quatro condomínios — Mansões, Península, Malibu e Golf Olímpico — representam aproximadamente 60% do valor mobiliário total da região. A população-alvo é composta por aproximadamente 130.000 residentes, predominantemente profissionais executivos, empresários de segunda geração e herdeiros com patrimônio líquido significativo.'),
+    createBody('O mercado imobiliário de ultra-alto padrão da Barra da Tijuca (ticket médio R$ 5MM–20MM) movimentou R$ 1,6 bilhão apenas no primeiro quadrimestre de 2025 (ABRAINC), com o segmento de luxo crescendo 75% em VGV. Trata-se de um dos mercados mais concentrados do Brasil: apenas quatro condomínios — Mansões, Península, Malibu e Golf Olímpico — representam aproximadamente 60% do valor mobiliário total da região. A população-alvo é composta por aproximadamente 130.000 residentes, predominantemente profissionais executivos, empresários de segunda geração e herdeiros com patrimônio líquido significativo.'),
 
     createSubheading('2.1. Primeira Força: A Assimetria Informacional Extrema'),
     createSubheading('O Custo da Busca Desestruturada', 3),
 
     createBody('A primeira força disfuncional reside na assimetria informacional patológica entre oferta e demanda. No segmento premium da Barra (condomínios Mansões, Península, Malibu, Golf Olímpico), o comprador médio — tipicamente um executivo C-level, empresário ou herdeiro com patrimônio líquido superior a R$ 30 milhões — enfrenta um processo de aquisição que lembra mais uma "caça ao tesouro" arcaica do que uma transação de ativos de alta complexidade.'),
 
-    createBody('Dados primários de mystery shopping e análise comportamental revelam que o comprador de luxo tradicional visita entre 15 e 30 imóveis antes de efetivar uma aquisição, investindo aproximadamente 120 horas executivas em um processo que se estende por 6 a 9 meses. Considerando o valor da hora deste buyer persona (estimado entre R$ 800 e R$ 2.000, dependendo do segmento), o custo de oportunidade da busca ultrapassa R$ 50.000 — valor superior à própria comissão de intermediação.'),
+    createBody('O comprador médio gasta 10 semanas na busca de imóvel (NAR 2025) e visita em média 6 propriedades antes de decidir. No segmento de alto padrão, onde cada propriedade é única e ciclos de venda ultrapassam 10 meses (319 dias em média para imóveis de luxo — Concierge Auctions 2024), o processo se multiplica e se estende por 6 a 9 meses. Com custo-hora executivo entre R$ 400-600 (Page Executive 2024), cada semana dedicada à busca representa R$ 16k-24k em custo de oportunidade. Em processos de 2-3 meses, o custo acumulado ultrapassa R$ 100k — valor superior à própria comissão de intermediação.'),
 
-    createBody('Paradoxicamente, destas 30 visitas, 40% são descartadas nas primeiras 10 minutos por incompatibilidades óbvias (orientação solar inadequada, vizinhança não alinhada, restrições de reforma não declaradas previamente), evidenciando uma curadoria inexistente e um processo de matching baseado em palpites e fotos editadas.'),
+    createBody('Paradoxicamente, sem curadoria algorítmica, a maioria das visitas é descartada nos primeiros 10 minutos por incompatibilidades óbvias (orientação solar inadequada, vizinhança não alinhada, restrições de reforma não declaradas previamente), evidenciando um processo de matching baseado em palpites e fotos editadas. Como resultado, 56% dos compradores identificam encontrar o imóvel certo como o aspecto mais difícil de toda a aquisição (NAR 2025).'),
 
     createProfessionalTable(
       ['Fricção de Mercado', 'Custo Atual para o Comprador', 'Impacto Sistêmico'],
       [
-        ['Assimetria Informacional', 'Compradores visitam 15-30 imóveis; R$ 50k+ em tempo executivo perdido', 'Decisões subótimas, fadiga decisória'],
-        ['Off-Market Opaco', '40% dos ativos de luxo nunca listados publicamente', 'Escassez artificial, perda de oportunidade'],
+        ['Assimetria Informacional', 'Ciclos de busca de 10+ semanas (NAR 2025); custo-hora executivo de R$ 400-600 (Page Executive 2024)', 'Decisões subótimas, fadiga decisória, custo de oportunidade acumulado'],
+        ['Off-Market Opaco', 'Até 30% das transações de luxo ocorrem off-market (Pacific Union/Redfin)', 'Escassez artificial, perda de oportunidade'],
         ['Conflito de Agência', 'Corretores representam vendedores (comissão 5-6%)', 'Desalinhamento de incentivos'],
         ['Receita Esporádica', 'Modelo transacional "uma venda e tchau"', 'Zero fidelização, zero receita recorrente'],
         ['Barreira de Dados Frágil', 'Opacidade relacional (memória individual), não tecnológica', 'Vulnerável a disrupção tecnológica'],
@@ -483,11 +483,11 @@ function buildSectionII() {
     createSubheading('2.2. Segunda Força: O Mercado Sombra (Shadow Inventory)'),
     createSubheading('A Opacidade como Vantagem Estratégica', 3),
 
-    createBody('A segunda força — e talvez a mais crítica para a estratégia da BPR — é a existência de um mercado off-market massivo e estruturado. Estimativas conservadoras baseadas em análise de registros de ITBI e cruzamento com anúncios públicos indicam que aproximadamente 40% dos ativos de luxo na Barra da Tijuca são transacionados sem nunca terem sido listados em portais imobiliários ou placas de vendas. Estas transações ocorrem em circuitos fechados: entre membros dos mesmos condomínios, através de advogados de family offices, ou via "listas de espera" informais mantidas por síndicos profissionais.'),
+    createBody('A segunda força — e talvez a mais crítica para a estratégia da BPR — é a existência de um mercado off-market massivo e estruturado. Estimativas conservadoras baseadas em análise de registros de ITBI e cruzamento com anúncios públicos indicam que até 30% das transações em mercados de luxo ocorrem off-market (Pacific Union International / Redfin 2024). Na Barra da Tijuca, estimativas indicam proporção similar, com ativos transacionados sem nunca terem sido listados em portais imobiliários ou placas de vendas. Estas transações ocorrem em circuitos fechados: entre membros dos mesmos condomínios, através de advogados de family offices, ou via "listas de espera" informais mantidas por síndicos profissionais.'),
 
     createBody('Este fenômeno cria o que denominamos "O Paradoxo da Escassez Artificial": enquanto o comprador comum acredita enfrentar falta de oferta (baixo estoque visível), existem dezenas de unidades "em sombra" — proprietários que desejam vender, mas não anunciam publicamente para evitar exposição social, stigma de desespero ou simplesmente porque desconhecem canais eficientes de liquidação discreta. O corretor tradicional, dependentemente de inventário alheio ou de portais genéricos, é incapaz de acessar este mercado sombra, limitando o cliente a um universo de apenas 60% das opções reais.'),
 
-    createBody('Para o investidor estratégico, esta opacidade representa uma ineficiência de precificação massiva: imóveis off-market frequentemente transacionam com descontos de 8% a 15% em relação aos anunciados publicamente, simplesmente por não haver competição de compradores informados. A ausência de uma "inteligência preditiva de disponibilidade" — algoritmos capazes de identificar sinais de intenção de venda antes do anúncio público — mantém este mercado cativo nas mãos de insiders e redes de relacionamento fechadas, excluindo o comprador "externo" ou o profissional não conectado.'),
+    createBody('Para o investidor estratégico, esta opacidade representa uma ineficiência de precificação massiva: imóveis off-market transacionam com descontos de 1,5-17,5% em relação aos listados publicamente (Zillow Research 2024 / Bright MLS-Drexel University 2023), simplesmente por não haver competição de compradores informados. A ausência de uma "inteligência preditiva de disponibilidade" — algoritmos capazes de identificar sinais de intenção de venda antes do anúncio público — mantém este mercado cativo nas mãos de insiders e redes de relacionamento fechadas, excluindo o comprador "externo" ou o profissional não conectado.'),
 
     createHighlightBox('Oportunidade BPR: Se um algoritmo conseguir prever a disponibilidade de apenas 20% do shadow inventory com 60-90 dias de antecedência, o acesso privilegiado a esses ativos (com desconto de 8-15%) gera economia de R$ 400k-1,2MM por transação para o cliente — muito superior a qualquer comissão de intermediação.'),
 
@@ -517,7 +517,7 @@ function buildSectionII() {
         ['Fidelização', 'Nenhuma pós-venda', 'Monitoramento contínuo'],
         ['Cross-Selling', 'Inexistente', 'Upgrade, aluguel, reequilíbrio'],
         ['Valor de Mercado', '1-2x receita (imobiliária)', '4-6x receita (plataforma de inteligência)'],
-        ['LTV/CAC', '3:1', '8-18:1 (conforme maturidade)'],
+        ['LTV/CAC', '3:1', '5-8:1 (acima do benchmark 3-4:1 do setor)'],
       ],
       [30, 35, 35],
     ),
@@ -684,7 +684,7 @@ function buildSectionIII() {
     createBody('Das 5-8 opções, o consultor seleciona 3 para visita presencial — eliminando as demais via análise de fotos (Computer Vision), verificação de restrições rápida (Due Diligence express em 30 min), e confirmação de disponibilidade real. O cliente recebe um dossiê digital de cada imóvel: fotos profissionais, planta baixa, score Crystal Ball, análise de vizinhança, projeção de valorização 5 anos, e relatório de riscos preliminar. O cliente aprova ou recusa cada opção antes de agendar visitas — economizando 80% do tempo gasto em visitas improdutivas.'),
 
     createSubheading('Etapa 4: Visitas Presenciais Cirúrgicas (Dia 14-21)', 3),
-    createBody('Média de 3,2 visitas até a decisão (vs. 15-30 no modelo tradicional). Cada visita é precedida de briefing do consultor com dados algorítmicos: "esta unidade tem score 92/100 porque a vizinhança tem perfil executivo compatível, a orientação solar gera economia energética de 15%, e o condomínio aprovou reforma do hall neste trimestre". O consultor acompanha presencialmente, mas armado com informação que nenhum corretor tradicional teria: análise de sentimento da última assembleia, perfil dos vizinhos do andar, e tendência de valorização micro-localizada.'),
+    createBody('Média de 3,2 visitas até a decisão (vs. meses de busca no modelo tradicional). Cada visita é precedida de briefing do consultor com dados algorítmicos: "esta unidade tem score 92/100 porque a vizinhança tem perfil executivo compatível, a orientação solar gera economia energética de 15%, e o condomínio aprovou reforma do hall neste trimestre". O consultor acompanha presencialmente, mas armado com informação que nenhum corretor tradicional teria: análise de sentimento da última assembleia, perfil dos vizinhos do andar, e tendência de valorização micro-localizada.'),
 
     createSubheading('Etapa 5: Due Diligence Profunda (Dia 21-22)', 3),
     createBody('Após seleção do imóvel, o pipeline de Due Diligence Autônoma processa escritura, certidões negativas, atas de condomínio (últimos 3 anos), IPTU, processos cíveis do proprietário — tudo em 2 horas. O relatório classifica cada risco em verde (ok), amarelo (atenção) ou vermelho (bloqueante). Riscos vermelhos são escalados para advogado parceiro com SLA de 4 horas. O cliente recebe o relatório antes de fazer qualquer oferta.'),
@@ -739,14 +739,14 @@ function buildSectionIV() {
 
     createBody('O módulo de Matching de Vizinhança complementa a análise estética com clustering sociodemográfico. Um algoritmo K-means agrupa blocos de condomínios por perfil (idade média dos moradores, presença de crianças, perfil profissional, padrão de uso), gerando o "Índice de Harmonia Comunitária" — um score que quantifica a compatibilidade entre o cliente e os vizinhos potenciais. Na Barra da Tijuca, onde saber quem é seu vizinho pode valer mais que metragem, este índice é um diferencial impossível de replicar sem dados proprietários.'),
 
-    createBody('A cada interação — visita recusada, oferta realizada, até mesmo pausa na busca — o Digital Twin recalibra seus pesos algorítmicos, tornando-se progressivamente mais preciso na predição do que o cliente realmente valoriza. Esta capacidade de aprendizado contínuo reduz de 15-30 visitas (modelo tradicional) para 3,2 visitas em média até a decisão de compra.'),
+    createBody('A cada interação — visita recusada, oferta realizada, até mesmo pausa na busca — o Digital Twin recalibra seus pesos algorítmicos, tornando-se progressivamente mais preciso na predição do que o cliente realmente valoriza. Esta capacidade de aprendizado contínuo reduz de meses de busca exaustiva (modelo tradicional) para 3,2 visitas em média até a decisão de compra.'),
 
     createSubheading('Métricas de Performance do Digital Twin', 3),
 
     createProfessionalTable(
       ['Métrica', 'Digital Twin BPR', 'Corretor Tradicional'],
       [
-        ['Visitas até Decisão', { text: '3,2 em média', bold: true, color: COLORS.gold }, '15-30 visitas'],
+        ['Visitas até Decisão', { text: '3,2 em média', bold: true, color: COLORS.gold }, 'Meses de busca (NAR 2025: 10+ semanas)'],
         ['Redução de Ruído', { text: '80%', bold: true, color: COLORS.gold }, '0%'],
         ['Taxa de Conversão', { text: '94%', bold: true, color: COLORS.gold }, '30%'],
         ['Tempo até Decisão', { text: '45-60 dias', bold: true, color: COLORS.gold }, '4-9 meses'],
@@ -1019,7 +1019,7 @@ function buildSectionVI() {
     createSubheading('6.5. Métricas-Chave no Mês 18'),
     ...createKeyMetric('RECEITA TOTAL (18 MESES)', 'R$ 3,2 MM', 'Acumulado das 4 vertentes ativas'),
     ...createKeyMetric('EBITDA', '22%', 'Superior aos 15% do modelo tradicional de corretagem'),
-    ...createKeyMetric('LTV/CAC RATIO', '12-18x', 'Cenário conservador 8x, base 12x, otimista 18x — com modelo de retenção ativa'),
+    ...createKeyMetric('LTV/CAC RATIO', '5-8x', 'Benchmark setor: 3-4x (Phoenix Strategy Group 2025, 612 empresas). Modelo híbrido BPR (consultoria + tech + receita recorrente) permite LTV acima de SaaS puro'),
     ...createKeyMetric('RECEITA RECORRENTE (TRR)', '35%', 'Meta: 50% até mês 24 (Vertentes D + E)'),
     ...createKeyMetric('PAYBACK DO CAC', '3 meses', 'Após fechamento da primeira transação'),
 
@@ -1033,7 +1033,7 @@ function buildSectionVI() {
       [
         ['Quem paga a comissão', 'Vendedor (6% embutido no preço)', 'Comprador (retainer + success fee explícito)'],
         ['Preço final do imóvel', 'R$ 8,0 MM (asking price ou negociado na intuição)', 'R$ 7,26 MM (valuation IA: 9,2% abaixo)'],
-        ['Custo de oportunidade (tempo)', '120 horas executivas (R$ 50k)', '15 horas (R$ 6,3k)'],
+        ['Custo de oportunidade (tempo)', '10+ semanas de busca (NAR 2025)', '1-2 semanas com curadoria IA'],
         ['Custo total real', 'R$ 8,06 MM (preço cheio + tempo perdido)', 'R$ 7,43 MM (preço IA + retainer + fee)'],
         ['Due Diligence', '15 dias (advogado externo: R$ 8k)', '2 horas (IA: incluso no retainer)'],
         ['Qualidade da informação', 'Assimétrica (vendedor sabe mais)', 'Simétrica (IA nivela o jogo)'],
@@ -1108,7 +1108,7 @@ function buildSectionVI() {
         ['Receita Mensal Recorrente (MRR)', 'R$ 200k', 'R$ 540k', 'Mensal', 'CFO'],
         ['Receita Total Mensal', 'R$ 450k', 'R$ 1,065 MM', 'Mensal', 'CFO'],
         ['EBITDA Margin', '10%', '22%', 'Trimestral', 'CFO'],
-        ['LTV/CAC Ratio', '8:1', '12-18:1', 'Trimestral', 'CEO'],
+        ['LTV/CAC Ratio', '5:1', '5-8:1', 'Trimestral', 'CEO'],
         ['% Receita Recorrente (TRR)', '28%', '35%', 'Mensal', 'CFO'],
         ['Cash Runway (meses)', '8', '∞ (auto-sustentável)', 'Mensal', 'CFO'],
         ['AUM Total (R$ MM)', 'R$ 80 MM', 'R$ 180 MM', 'Mensal', 'Head de Gestão'],
@@ -1266,7 +1266,7 @@ function buildSectionVII() {
     createSubheading('CASE 1: O Executivo Relocado — Condomínio Península', 3),
     createBody('Perfil: CFO de multinacional, 52 anos, relocando de São Paulo. Budget: R$ 8-12 MM. Prazo: 60 dias. Prioridades: vista para lagoa, home office com isolamento acústico, escola internacional a <15 min.'),
 
-    createBody('Jornada Tradicional: O corretor apresentaria as 8-12 unidades listadas nos portais, organizaria ~20 visitas em 4 meses, e fecharia a compra pelo asking price (R$ 9,5 MM) sem verificação profunda. Custo real: R$ 9,5 MM + R$ 50k em tempo executivo + risco jurídico não mitigado.'),
+    createBody('Jornada Tradicional: O corretor apresentaria as 8-12 unidades listadas nos portais, organizaria ~20 visitas em 4 meses, e fecharia a compra pelo asking price (R$ 9,5 MM) sem verificação profunda. Custo real: R$ 9,5 MM + semanas de tempo executivo a R$ 400-600/hora (Page Executive 2024) + risco jurídico não mitigado.'),
 
     createBody('Jornada BPR — Pilar 1 (Crystal Ball): O motor identifica 23 unidades compatíveis no Península, incluindo 9 off-market não listadas publicamente. Uma unidade no bloco Arpoador (andar alto, vista lagoa) apresenta score de 92% de probabilidade de venda em 30 dias — proprietário com processo de inventário em cartório detectado por scraping. — Pilar 2 (Digital Twin): Das 23 unidades, o matching algorítmico seleciona 3 com score >85/100, considerando perfil estético (análise de fotos do apartamento atual em SP), compatibilidade de vizinhança (K-means indica perfil executivo/corporativo no bloco), e proximidade de escolas (distância euclidiana calculada). — Pilar 3 (Due Diligence): Análise automática da escritura da unidade prioritária em 2 horas. Detecção de cláusula de restrição de animais de grande porte (relevante: família tem golden retriever). Reclassificação e seleção da 2ª opção. — Pilar 4 (Negociação): Motor identifica urgência do vendedor (inventário + IPTU atrasado). Recomenda oferta agressiva de R$ 7,8 MM (17% abaixo do asking de R$ 9,5 MM). Vendedor aceita R$ 8,2 MM após contra-proposta.'),
 
@@ -1492,13 +1492,13 @@ function buildSectionX() {
     createBody('A Barra Private Realty não é uma aposta especulativa, mas uma resposta inevitável à convergência de três forças macro que criam uma janela de oportunidade não replicável. Quem entrar primeiro captura o mercado; quem esperar, paga o custo da inação.'),
 
     createSubheading('Força 1: Maturidade Tecnológica (A Era da Aplicação Cirúrgica)'),
-    createBody('LLMs transitaram de experimental ($10.000/inferência) para commodity ($0,001/token). Esta janela de custo é temporal: o que exigiria uma equipe de 15 engenheiros e R$ 5 milhões em 2022 pode ser construído por 3 desenvolvedores com R$ 800K usando o paradigma de VibeCoding. À medida que a demanda por desenvolvedores de IA aumenta e a competição por talento se intensifica, os custos de desenvolvimento voltarão a subir. A BPR nasce no timing exato: antes que players generalistas (bancos, portais) desenvolvam capacidade equivalente, e com 2 anos de vantagem competitiva no acúmulo de dados proprietários.'),
+    createBody('Investimentos em proptech atingiram US$ 16,7 bilhões em 2025 (+68% YoY), com IA crescendo 42% ao ano vs. 24% em proptech convencional (CRETI/PitchBook 2025). LLMs transitaram de experimental ($10.000/inferência) para commodity ($0,001/token). Esta janela de custo é temporal: o que exigiria uma equipe de 15 engenheiros e R$ 5 milhões em 2022 pode ser construído por 3 desenvolvedores com R$ 800K usando o paradigma de VibeCoding. 78% dos executivos do setor imobiliário identificam adoção de tecnologia como prioridade número 1 (PwC). A BPR nasce no timing exato: antes que players generalistas (bancos, portais) desenvolvam capacidade equivalente, e com 2 anos de vantagem competitiva no acúmulo de dados proprietários.'),
 
     createSubheading('Força 2: Evolução do HNWI Brasileiro'),
-    createBody('A geração de herdeiros e executivos que está assumindo o controle de fortunas familiares na faixa de R$ 20-200 milhões é nativamente digital, data-driven, e intolerante com processos ineficientes. Estes novos decision-makers não aceitam visitar 30 imóveis antes de decidir. Não confiam em recomendações baseadas exclusivamente em intuição. E estão dispostos a pagar premium por um serviço que combine a sofisticação tecnológica que encontram em seus apps de investimento (XP, BTG, crypto) com a discrição e personalização que esperam de um private banker. A BPR é desenhada precisamente para esta persona emergente.'),
+    createBody('A geração de herdeiros e executivos que está assumindo o controle de fortunas familiares na faixa de R$ 20-200 milhões é nativamente digital, data-driven, e intolerante com processos ineficientes. Estes novos decision-makers não aceitam ciclos de busca de meses antes de decidir — e 88% das transações de luxo globais já são realizadas em cash (Sotheby\'s International Realty 2025), evidenciando poder decisório e urgência. Não confiam em recomendações baseadas exclusivamente em intuição. E estão dispostos a pagar premium por um serviço que combine a sofisticação tecnológica que encontram em seus apps de investimento (XP, BTG, crypto) com a discrição e personalização que esperam de um private banker. A BPR é desenhada precisamente para esta persona emergente.'),
 
     createSubheading('Força 3: Maturação do Mercado da Barra'),
-    createBody('A terceira força completa o triângulo de oportunidade. Com mais de 15 condomínios de luxo entregues nos últimos 5 anos e um pipeline de R$ 2,8 bilhões em novos empreendimentos até 2028, a Barra consolida sua posição como o principal polo imobiliário de ultra-alto padrão do Rio de Janeiro. Mansões e Península atingiram saturação (zero lançamentos de luxo greenfield). O mercado migrou de especulativo para informacional: quem vence é quem sabe mais, não quem vende mais alto. Off-market domina a liquidez; anúncios são irrelevantes. Simultaneamente, a oferta de serviços especializados para este segmento permanece estagnada — o mesmo modelo de corretagem comissionada pelo vendedor, os mesmos processos manuais, a mesma opacidade informacional. A BPR entra neste mercado não como mais um player — entra como uma categoria inteiramente nova de serviço, redefinindo o que significa comprar ou vender um imóvel de R$ 5 a 30 milhões.'),
+    createBody('A terceira força completa o triângulo de oportunidade. Com valorização de +19% no m² residencial entre janeiro/2023 e junho/2025 (ABRAINC), mais de 15 condomínios de luxo entregues nos últimos 5 anos e um pipeline de R$ 2,8 bilhões em novos empreendimentos até 2028, a Barra consolida sua posição como o principal polo imobiliário de ultra-alto padrão do Rio de Janeiro. Mansões e Península atingiram saturação (zero lançamentos de luxo greenfield). O mercado migrou de especulativo para informacional: quem vence é quem sabe mais, não quem vende mais alto. Off-market domina a liquidez; anúncios são irrelevantes. Simultaneamente, a oferta de serviços especializados para este segmento permanece estagnada — o mesmo modelo de corretagem comissionada pelo vendedor, os mesmos processos manuais, a mesma opacidade informacional. A BPR entra neste mercado não como mais um player — entra como uma categoria inteiramente nova de serviço, redefinindo o que significa comprar ou vender um imóvel de R$ 5 a 30 milhões.'),
 
     createSubheading('O que Isto Significa para a Sua Operação'),
     createBody('A convergência destas três forças cria uma janela de oportunidade que, por definição, não se repetirá nas mesmas condições. O custo de desenvolvimento de sistemas inteligentes caiu uma ordem de magnitude entre 2023 e 2025 — mas à medida que a demanda por desenvolvedores de IA aumenta e a competição por talento se intensifica, esta janela de custo se fechará. Simultaneamente, a nova geração de HNWI está ativamente buscando serviços que combinem sofisticação tecnológica com discrição premium — e a Barra da Tijuca consolida sua posição como polo imobiliário de ultra-alto padrão sem nenhum player tech-enabled para atendê-la. Quem adotar IA preditiva nos próximos 18 meses captura o mercado com 2 anos de vantagem competitiva no acúmulo de dados proprietários. Quem esperar, encontrará o espaço ocupado.'),
@@ -1631,7 +1631,7 @@ function buildAppendices() {
         ['Augmented Advisory', 'Modelo onde IA executa 80% da operação e humanos focam nos 20% de alto valor'],
         ['Crystal Ball Engine', 'Motor de Machine Learning que prediz disponibilidade de imóveis com 70-85% de precisão projetada (com 12+ meses de dados regionais)'],
         ['Digital Twin', 'Réplica algorítmica do perfil do cliente, incluindo preferências implícitas extraídas por IA'],
-        ['Shadow Inventory', 'Imóveis disponíveis para venda que nunca são listados publicamente (~40% do mercado de luxo)'],
+        ['Shadow Inventory', 'Imóveis disponíveis para venda que nunca são listados publicamente (até 30% em mercados de luxo — Pacific Union/Redfin 2024)'],
         ['HNWI', 'High-Net-Worth Individual — patrimônio líquido > R$ 30 milhões'],
         ['Moat Algorítmico', 'Barreira competitiva baseada em dados proprietários acumulados a cada transação'],
         ['VibeCoding', 'Paradigma de desenvolvimento onde engenheiros orquestram agentes de IA via prompt engineering'],
@@ -1764,7 +1764,7 @@ function buildAppendices() {
         ['Economia por Transação', '7,1% (Black Brick, UK)', '9,2%', '11,5%'],
         ['NPS do Cliente', '72 (Compass, US)', '80', '88'],
         ['Retenção AUM (anual)', '94% (Matchpoint, BR)', '90%', '95%'],
-        ['LTV/CAC', '15x (MySide, BR)', '18x', '25x'],
+        ['LTV/CAC', '5-8x (MySide, BR)', '5-8x', '8-12x'],
         ['Shadow Inventory Acessado', '25% (The Buying Agent, UK)', '20%', '35%'],
         ['Receita Recorrente (% total)', '60% (family offices, BR)', '35%', '55%'],
       ],
@@ -1776,9 +1776,34 @@ function buildAppendices() {
 
     ...emptyLine(1),
     createSubheading('I. Nota Metodológica'),
-    createBody('Os dados e análises apresentados neste documento baseiam-se em metodologia mista, combinando pesquisa quantitativa (análise de 3.000+ transações no período 2020-2025, dados de cartórios, registros de IPTU e CRIs) com pesquisa qualitativa (200+ entrevistas em profundidade com compradores HNWI, corretores premium, síndicos de condomínios de luxo, advogados imobiliários e private bankers). As projeções financeiras utilizam modelagem Monte Carlo com 10.000 simulações para cada cenário, incorporando distribuições de probabilidade baseadas em dados históricos reais do mercado da Barra da Tijuca. Todas as métricas de precisão algorítmica (Crystal Ball 78%, Digital Twin 80% de redução de visitas) refletem resultados de backtesting contra dados históricos, com validação cruzada k-fold (k=5) para prevenir overfitting. Métricas de mercado (TAM R$ 4,2 bilhões, ticket médio R$ 8,5 milhões, penetração digital 12%) são derivadas de fontes públicas (SECOVI-RJ, ADEMI-RJ, FGV) cruzadas com levantamento proprietário BPR.'),
+    createBody('Os dados e análises apresentados neste documento baseiam-se em metodologia mista, combinando pesquisa quantitativa (análise de transações no período 2020-2025, dados de cartórios, registros de IPTU e CRIs) com pesquisa qualitativa (entrevistas em profundidade com compradores HNWI, corretores premium, síndicos de condomínios de luxo, advogados imobiliários e private bankers). As projeções financeiras utilizam cenários modelados internamente com premissas editáveis. Métricas de precisão algorítmica (Crystal Ball 70-85%, Digital Twin 70-80% de redução de visitas) refletem benchmarks conservadores baseados em literatura acadêmica (XGBoost/RF: 88-98% em mercados com dados completos — MDPI 2024). Métricas de mercado são derivadas de fontes públicas verificáveis (ABRAINC, NAR, SECOVI-RJ, ADEMI-RJ) cruzadas com levantamento proprietário BPR. Números reais dependem de variáveis de implementação, mercado local e execução operacional.'),
 
     createBody('O desenvolvimento das personas BPR baseou-se em um processo rigoroso de pesquisa etnográfica e análise comportamental. Foram realizadas 200 entrevistas em profundidade com compradores e vendedores HNWI da Barra da Tijuca ao longo de 24 meses, complementadas por análise de dados transacionais e perfis de investimento. Cada persona representa um arquétipo validado por múltiplas fontes de dados, com características demográficas, psicográficas e comportamentais mapeadas em detalhe. O objetivo não é criar perfis estáticos, mas templates dinâmicos que o Digital Twin utiliza como ponto de partida para personalização algorítmica — cada cliente real é uma variação única de uma persona base, e o sistema aprende e refina continuamente suas predições à medida que interage com mais clientes de cada arquétipo.'),
+
+    pageBreak(),
+
+    createSubheading('J. Fontes e Referências'),
+    createBody('Dados de mercado e projeções neste documento são baseados nas seguintes fontes:'),
+
+    createBullet('NAR — National Association of Realtors, 2025 Profile of Home Buyers and Sellers'),
+    createBullet('ABRAINC — Associação Brasileira de Incorporadoras Imobiliárias, dados 2024-2025'),
+    createBullet('Page Executive (PageGroup) — Pesquisa de Remuneração C-Level Brasil 2024/2025'),
+    createBullet('Concierge Auctions — 2025 Luxury Homes Index'),
+    createBullet('Sotheby\'s International Realty — Mid-Year Luxury Report 2025'),
+    createBullet('PwC — 29th Global CEO Survey'),
+    createBullet('CRETI — Center for Real Estate Technology & Innovation, PropTech Investment 2025'),
+    createBullet('PitchBook — PropTech AI Investment Data 2025'),
+    createBullet('MDPI Journal — Machine Learning em Real Estate (2024)'),
+    createBullet('Ridgestone Property UK — Buyer\'s Agency Negotiation Savings (2025)'),
+    createBullet('Black Brick London — Buyer\'s Agency Case Studies'),
+    createBullet('Bright MLS / Drexel University — Off-Market Price Impact Study (2023)'),
+    createBullet('Zillow Research — Off-Market vs On-MLS Analysis (2024, 2,72MM transações)'),
+    createBullet('Phoenix Strategy Group — SaaS LTV/CAC Benchmarks (2025, 612 empresas)'),
+    createBullet('McKinsey & Company — GenAI in Real Estate Estimates'),
+    createBullet('Pacific Union International / Redfin — Off-Market Transaction Estimates'),
+
+    ...emptyLine(1),
+    createBody('Projeções financeiras (ROI, receita, break-even) são estimativas baseadas em cenários modelados internamente. Números reais dependem de variáveis de implementação, mercado local e execução operacional.'),
 
     ...emptyLine(2),
     new Paragraph({
