@@ -4,7 +4,7 @@
 
 **Epic ID:** EPIC-BPR
 **PRD Reference:** `docs/prd/bpr-intelligence-prd.md`
-**Status:** InProgress (7/9 stories Done, 2 Ready)
+**Status:** Done (9/9 stories — caveat: WhatsApp placeholder pending in Story 1.8)
 **Owner:** @pm
 
 ## Goal
@@ -29,14 +29,17 @@ Consolidar os 18 documentos-fonte do projeto BPR Intelligence em dois entregáve
 | 1.5 | DOCX Expansion (80+ pages) | Done | @dev | @qa | 4: Refinements |
 | 1.6 | Pricing Tiers Integration | Done | @dev | @qa | 4: Refinements |
 | 1.7 | Quality Verification (43-pt) | Done | @qa | @architect | 5: Quality |
-| 1.8 | HTML Accessibility Fixes | Ready | @dev | @architect | 6: Final Fixes |
-| 1.9 | DOCX Page Count Verification | Ready | @dev | @qa | 6: Final Fixes |
+| 1.8 | HTML Accessibility Fixes | Done* | @dev | @architect | 6: Final Fixes |
+| 1.9 | DOCX Page Count Verification | Done | @dev | @qa | 6: Final Fixes |
+
+*\* Caveat: WhatsApp CTA tem placeholder (`5521999999999`) — substituir quando Paulo Gomes fornecer o número real.*
 
 ## Progress
 
-- **Completed:** 7/9 stories (78%)
-- **Remaining:** 2 stories (1.8 HTML A11y Fixes, 1.9 Page Count Verification)
-- **Blockers:** Story 1.8 requer número real de WhatsApp do project owner
+- **Completed:** 9/9 stories (100%)
+- **Remaining:** 0
+- **Caveats:** Story 1.8 WhatsApp CTA com placeholder — trocar quando número real fornecido
+- **Closed:** 2026-02-23
 
 ## Source Documents
 
@@ -62,3 +65,4 @@ Located in Dropbox: `/Users/mac/Library/CloudStorage/Dropbox/BOT INVEST/Paulo Go
 | Date | Version | Description | Author |
 |------|---------|-------------|--------|
 | 2026-02-22 | 1.0 | Epic criado retroativamente para integração ao AIOS | @pm |
+| 2026-02-23 | 1.1 | Epic fechado — 9/9 stories Done (caveat: WhatsApp placeholder na Story 1.8) | @dev |
