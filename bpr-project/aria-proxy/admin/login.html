@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPR Intelligence | SDR Login</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d0d0d'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%23c9b037' font-family='serif' font-size='20' font-weight='bold'>B</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--bpr-charcoal:#0d0d0d;--bpr-gold:#c9b037;--bpr-gold-light:#e0c94a;--bpr-surface:#151515;--bpr-gray:#888;--bpr-gray-light:#b0b0b0;--bpr-white:#e0e0e0}
+    body{background:var(--bpr-charcoal);color:var(--bpr-white);font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .login-card{background:rgba(21,21,21,0.9);backdrop-filter:blur(16px);border:1px solid rgba(201,176,55,0.15);border-radius:16px;padding:48px 40px;width:100%;max-width:420px;text-align:center}
+    .login-logo{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--bpr-gold);margin-bottom:8px}
+    .login-sub{font-size:13px;color:var(--bpr-gray);margin-bottom:40px;letter-spacing:1px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+    .form-group{margin-bottom:20px;text-align:left}
+    .form-label{display:block;font-size:13px;font-weight:500;color:var(--bpr-gray-light);margin-bottom:6px}
+    .form-input{width:100%;padding:14px 16px;background:rgba(13,13,13,0.8);border:1px solid rgba(201,176,55,0.2);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;transition:border-color .3s}
+    .form-input:focus{border-color:var(--bpr-gold);outline:none}
+    .form-input::placeholder{color:#555}
+    .login-btn{width:100%;padding:16px;background:linear-gradient(135deg,#c9b037,#e0c94a);color:#0d0d0d;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:16px;cursor:pointer;transition:all .3s;margin-top:8px}
+    .login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,176,55,0.3)}
+    .login-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+    .error-msg{color:#ff5555;font-size:13px;margin-top:16px;min-height:20px}
+    .footer-text{font-size:11px;color:var(--bpr-gray);margin-top:32px;font-family:'JetBrains Mono',monospace}
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="login-logo">BPR</div>
+    <div class="login-sub">SDR Dashboard</div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="email">E-mail</label>
+        <input type="email" id="email" class="form-input" placeholder="seu@email.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Senha</label>
+        <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">Entrar</button>
+    </form>
+    <div class="error-msg" id="errorMsg"></div>
+    <div class="footer-text">&copy; 2026 BPR Intelligence</div>
+  </div>
+
+  <script>
+    var SUPABASE_URL = 'https://vozrchjtnuzfphzqixep.supabase.co';
+    var SUPABASE_ANON_KEY = 'sb_publishable_Lb2xnCdvYMB0JrUxY98L1Q_dG2I_vui';
+    var errorMsg = document.getElementById('errorMsg');
+
+    // Login via fetch direto (sem depender do SDK)
+    async function doLogin(email, password) {
+      var resp = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email, password: password })
+      });
+
+      var data = await resp.json();
+
+      if (!resp.ok || !data.access_token) {
+        throw new Error(data.error_description || data.msg || data.message || 'Login falhou');
+      }
+
+      // Salvar session no localStorage (mesmo formato do supabase-js)
+      var session = {
+        access_token: data.access_token,
+        refresh_token: data.refresh_token,
+        expires_at: data.expires_at,
+        token_type: data.token_type,
+        user: data.user
+      };
+
+      localStorage.setItem('sb-vozrchjtnuzfphzqixep-auth-token', JSON.stringify({
+        currentSession: session,
+        expiresAt: data.expires_at
+      }));
+
+      // Tambem salvar no formato que o supabase-js v2 espera
+      localStorage.setItem('sb-' + 'vozrchjtnuzfphzqixep' + '-auth-token', JSON.stringify(session));
+
+      return session;
+    }
+
+    // Check if already logged in
+    (function() {
+      try {
+        var stored = localStorage.getItem('sb-vozrchjtnuzfphzqixep-auth-token');
+        if (stored) {
+          var parsed = JSON.parse(stored);
+          var token = parsed.access_token || (parsed.currentSession && parsed.currentSession.access_token);
+          if (token) {
+            window.location.href = '/admin/index.html';
+            return;
+          }
+        }
+      } catch(e) {}
+    })();
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      errorMsg.textContent = '';
+      var btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.textContent = 'Entrando...';
+
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
+
+      try {
+        await doLogin(email, password);
+        window.location.href = '/admin/index.html';
+      } catch(err) {
+        errorMsg.textContent = err.message;
+        btn.disabled = false;
+        btn.textContent = 'Entrar';
+      }
+    });
+  </script>
+</body>
+</html>

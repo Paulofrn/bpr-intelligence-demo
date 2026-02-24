@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/aria.js", "use": "@vercel/node" },
+    { "src": "api/track.js", "use": "@vercel/node" },
+    { "src": "api/leads.js", "use": "@vercel/node" },
+    { "src": "admin/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/aria", "dest": "/api/aria.js" },
+    { "src": "/api/track", "dest": "/api/track.js" },
+    { "src": "/api/leads(.*)", "dest": "/api/leads.js" },
+    { "src": "/admin/(.*)", "dest": "/admin/$1" }
+  ]
+}

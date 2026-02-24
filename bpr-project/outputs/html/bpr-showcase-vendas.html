@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://bpr-aria-proxy.vercel.app https://*.supabase.co; img-src 'self' data:; frame-ancestors 'none'; upgrade-insecure-requests">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <title>BPR Intelligence | Da imobiliária que vende imóvel para a imobiliária que pensa</title>
+  <meta name="description" content="BPR Intelligence — Ecossistema de Inteligência Artificial para imobiliárias premium. Cinco ferramentas que transformam dados em vantagem competitiva permanente.">
+  <meta property="og:title" content="BPR Intelligence | Da imobiliária que vende imóvel para a imobiliária que pensa">
+  <meta property="og:description" content="Ecossistema de IA agêntica para imobiliárias de alto padrão. Antecipe oportunidades, reduza ciclos e fidelize clientes com inteligência acumulativa.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://bprintelligence.com/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d0d0d'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%23c9b037' font-family='serif' font-size='20' font-weight='bold'>B</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:#0d0d0d;color:#e0e0e0;font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+    input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text}
+
+    /* ========== CSS VARIABLES ========== */
+    :root{
+      --bpr-charcoal:#0d0d0d;--bpr-darker:#070a12;--bpr-gold:#c9b037;--bpr-gold-light:#e0c94a;
+      --bpr-cyan:#00d2ff;--bpr-cyan-dark:#0099bb;--bpr-surface:#151515;--bpr-surface-light:#1e1e1e;
+      --bpr-gray:#888888;--bpr-gray-light:#b0b0b0;--bpr-white:#e0e0e0;
+    }
+
+    /* ========== SCROLLBAR ========== */
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#0d0d0d}
+    ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:var(--bpr-gold)}
+
+    /* ========== SKIP LINK ========== */
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--bpr-gold);color:#0d0d0d;padding:8px 24px;border-radius:0 0 8px 8px;font-weight:600;z-index:10000;text-decoration:none;font-size:14px}
+    .skip-link:focus{top:0}
+
+    /* ========== BACKGROUND GRID ========== */
+    .bg-grid{position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(201,176,55,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,176,55,0.03) 1px,transparent 1px);background-size:60px 60px;animation:gridPulse 8s ease-in-out infinite;pointer-events:none;z-index:0}
+    @keyframes gridPulse{0%,100%{opacity:.4}50%{opacity:.8}}
+
+    /* ========== GLASS CARD ========== */
+    .glass-card{background:rgba(21,21,21,0.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(201,176,55,0.12);border-radius:12px;transition:all .4s cubic-bezier(.16,1,.3,1)}
+    .glass-card:hover{transform:translateY(-4px);border-color:rgba(201,176,55,0.35);box-shadow:0 8px 32px rgba(201,176,55,0.08)}
+
+    /* ========== GOLD DIVIDER ========== */
+    .gold-divider{height:1px;background:linear-gradient(90deg,transparent,#c9b037,transparent);margin:40px auto;width:200px}
+
+    /* ========== REVEAL ANIMATIONS ========== */
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-left{opacity:0;transform:translateX(-30px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+    .reveal-left.visible{opacity:1;transform:translateX(0)}
+    .reveal-right{opacity:0;transform:translateX(30px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+    .reveal-right.visible{opacity:1;transform:translateX(0)}
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes pulse-gold{0%,100%{box-shadow:0 0 0 0 rgba(201,176,55,0.4)}50%{box-shadow:0 0 0 15px rgba(201,176,55,0)}}
+    @keyframes bounce-arrow{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+    @keyframes typing-dot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+    .animate-float{animation:float 6s ease-in-out infinite}
+    .animate-pulse-gold{animation:pulse-gold 2s ease-in-out infinite}
+
+    /* ========== BADGE ========== */
+    .badge{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 14px;border-radius:4px;letter-spacing:1.5px;text-transform:uppercase;display:inline-block}
+    .badge-gold{background:rgba(201,176,55,0.15);color:#c9b037;border:1px solid rgba(201,176,55,0.3)}
+    .badge-cyan{background:rgba(0,210,255,0.1);color:#00d2ff;border:1px solid rgba(0,210,255,0.25)}
+
+    /* ========== COUNTER ========== */
+    .counter{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+
+    /* ========== CTA BUTTON ========== */
+    .cta-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 40px;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:16px;text-decoration:none;transition:all .3s ease;cursor:pointer;border:none}
+    .cta-btn-gold{background:linear-gradient(135deg,#c9b037,#e0c94a);color:#0d0d0d}
+    .cta-btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,176,55,0.3)}
+    .cta-btn-outline{background:transparent;border:1px solid rgba(201,176,55,0.4);color:#c9b037}
+    .cta-btn-outline:hover{background:rgba(201,176,55,0.1);border-color:#c9b037}
+
+    /* ========== SECTION BASE ========== */
+    section{position:relative;z-index:1}
+
+    /* ========== GLOW EFFECTS ========== */
+    .glow-gold{text-shadow:0 0 40px rgba(201,176,55,0.2)}
+    .glow-cyan{text-shadow:0 0 40px rgba(0,210,255,0.2)}
+
+    /* ========== FOCUS VISIBLE (WCAG 2.1 AA) ========== */
+    a:focus-visible,button:focus-visible,.cta-btn:focus-visible,input:focus-visible{outline:2px solid #c9b037;outline-offset:4px;border-radius:4px}
+    .glass-card a:focus-visible{outline-offset:2px}
+    [tabindex]:focus-visible{outline:2px solid #c9b037;outline-offset:2px}
+
+    /* ========== TYPOGRAPHY ========== */
+    .font-serif{font-family:'Playfair Display',serif}
+    .font-mono{font-family:'JetBrains Mono',monospace}
+    .text-gold{color:var(--bpr-gold)}
+    .text-cyan{color:var(--bpr-cyan)}
+    .text-gray{color:var(--bpr-gray)}
+    .text-gray-light{color:var(--bpr-gray-light)}
+
+    /* ========== LAYOUT UTILITIES ========== */
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    .section-pad{padding:100px 0}
+    .text-center{text-align:center}
+    .flex{display:flex}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}
+    .gap-6{gap:24px}.gap-8{gap:32px}.gap-12{gap:48px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .w-full{width:100%}.mx-auto{margin-left:auto;margin-right:auto}
+    .mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}.mb-6{margin-bottom:24px}.mb-8{margin-bottom:32px}.mb-12{margin-bottom:48px}
+    .mt-4{margin-top:16px}.mt-6{margin-top:24px}.mt-8{margin-top:32px}.mt-12{margin-top:48px}
+    .p-6{padding:24px}.p-8{padding:32px}.p-10{padding:40px}
+    .relative{position:relative}
+
+    /* ========== HERO ========== */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;background:radial-gradient(ellipse at 50% 0%,rgba(201,176,55,0.06) 0%,transparent 60%)}
+    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5.5vw,64px);font-weight:700;line-height:1.15;color:#fff;max-width:850px}
+    .hero-title em{font-style:italic;color:var(--bpr-gold);font-weight:800}
+    .hero-sub{font-size:clamp(16px,2vw,20px);color:var(--bpr-gray-light);max-width:680px;line-height:1.8;margin-top:28px}
+    .scroll-hint{margin-top:48px;color:var(--bpr-gold);font-size:14px;letter-spacing:1px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:.7;transition:opacity .3s}
+    .scroll-hint:hover{opacity:1}
+    .scroll-arrow{animation:bounce-arrow 2s ease-in-out infinite;font-size:24px}
+
+    /* ========== DOR CARDS ========== */
+    .dor-card{padding:28px;position:relative;overflow:hidden}
+    .dor-card .dor-icon{font-size:28px;margin-bottom:12px}
+    .dor-card .dor-title{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:10px;font-style:italic}
+    .dor-card .dor-body{font-size:14px;color:var(--bpr-gray-light);line-height:1.7;margin-bottom:16px}
+    .dor-card .dor-stat{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--bpr-gold);letter-spacing:1.5px;text-transform:uppercase;padding-top:12px;border-top:1px solid rgba(201,176,55,0.15)}
+
+    /* ========== TOOL SECTIONS ========== */
+    .tool-section{padding:80px 0}
+    .tool-badge{margin-bottom:16px}
+    .tool-tagline{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);font-weight:700;color:#fff;line-height:1.3;margin-bottom:20px}
+    .tool-body{font-size:16px;color:var(--bpr-gray-light);line-height:1.8;margin-bottom:16px}
+    .tool-case{padding:24px;background:rgba(201,176,55,0.04);border-left:3px solid var(--bpr-gold);border-radius:0 8px 8px 0;margin:24px 0}
+    .tool-case-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--bpr-gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+    .tool-case p{font-size:15px;color:var(--bpr-gray-light);line-height:1.8}
+    .tool-metrics{display:flex;gap:32px;margin:28px 0;flex-wrap:wrap}
+    .tool-metric{text-align:center}
+    .tool-metric .metric-value{font-family:'JetBrains Mono',monospace;font-size:clamp(28px,4vw,40px);font-weight:600;line-height:1}
+    .tool-metric .metric-label{font-size:12px;color:var(--bpr-gray);letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+    .tool-closing{font-family:'Playfair Display',serif;font-style:italic;color:var(--bpr-gold);font-size:16px;margin-top:24px;opacity:.85}
+
+    /* ========== CALCULATOR ========== */
+    .calc-section{background:var(--bpr-surface);border-radius:16px;padding:40px;border:1px solid rgba(201,176,55,0.1)}
+    .calc-input-group{margin-bottom:24px}
+    .calc-label{font-size:14px;font-weight:500;color:var(--bpr-gray-light);margin-bottom:8px;display:block}
+    .calc-input{width:100%;padding:14px 16px;background:rgba(13,13,13,0.8);border:1px solid rgba(201,176,55,0.2);border-radius:8px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:16px;transition:border-color .3s}
+    .calc-input:focus{border-color:var(--bpr-gold);outline:none}
+    .calc-slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:rgba(201,176,55,0.2);border-radius:2px;outline:none;margin-top:8px}
+    .calc-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--bpr-gold);cursor:pointer;box-shadow:0 0 10px rgba(201,176,55,0.4)}
+    .calc-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--bpr-gold);cursor:pointer;border:none}
+    .calc-output-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+    .calc-output{padding:24px;border-radius:12px;text-align:center}
+    .calc-output.gold-out{background:rgba(201,176,55,0.08);border:1px solid rgba(201,176,55,0.2)}
+    .calc-output.cyan-out{background:rgba(0,210,255,0.06);border:1px solid rgba(0,210,255,0.15)}
+    .calc-output .out-value{font-family:'JetBrains Mono',monospace;font-size:clamp(22px,3vw,32px);font-weight:600;line-height:1.2}
+    .calc-output .out-label{font-size:12px;color:var(--bpr-gray);margin-top:6px;text-transform:uppercase;letter-spacing:.5px}
+
+    /* ========== COMPARE TABLE ========== */
+    .compare-table{width:100%;border-collapse:collapse;margin-top:32px}
+    .compare-table th,.compare-table td{padding:14px 16px;text-align:left;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .compare-table th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--bpr-gray)}
+    .compare-table .col-sem{color:#e55;font-weight:400}
+    .compare-table .col-com{color:var(--bpr-gold);font-weight:600}
+
+    /* ========== EXCLUSIVITY CARDS ========== */
+    .excl-card{padding:32px;display:flex;flex-direction:column}
+    .excl-card .excl-title{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:12px}
+    .excl-card .excl-body{font-size:14px;color:var(--bpr-gray-light);line-height:1.8}
+
+    /* ========== CTA SECTION ========== */
+    .cta-section{text-align:center;padding:100px 24px;background:linear-gradient(180deg,transparent 0%,rgba(201,176,55,0.03) 100%)}
+
+    /* ========== FOOTER ========== */
+    footer{text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:var(--bpr-gray)}
+
+    /* ========== ARIA CHAT ========== */
+    .aria-toggle{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#c9b037,#e0c94a);color:#0d0d0d;border:none;cursor:pointer;z-index:9998;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;box-shadow:0 4px 20px rgba(201,176,55,0.3);transition:all .3s}
+    .aria-toggle:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(201,176,55,0.4)}
+    .aria-toggle.has-unread::after{content:'';position:absolute;top:2px;right:2px;width:12px;height:12px;background:#00d2ff;border-radius:50%;border:2px solid #0d0d0d}
+
+    /* Aria hint tooltip */
+    .aria-hint{position:fixed;bottom:44px;right:90px;z-index:9997;pointer-events:none;display:flex;align-items:center;gap:8px}
+    .aria-hint-text{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:400;color:rgba(201,176,55,0.75);white-space:nowrap;letter-spacing:0.3px;animation:ariaHintPulse 3.5s ease-in-out infinite}
+    .aria-hint-arrow{color:rgba(201,176,55,0.6);font-size:14px;animation:ariaHintPulse 3.5s ease-in-out infinite,ariaHintNudge 2s ease-in-out infinite}
+    @keyframes ariaHintPulse{0%,100%{opacity:0.25}50%{opacity:1}}
+    @keyframes ariaHintNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+
+    .aria-panel{position:fixed;bottom:90px;right:24px;width:380px;max-height:520px;background:rgba(21,21,21,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(201,176,55,0.15);border-radius:16px;z-index:9999;display:none;flex-direction:column;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,0.5)}
+    .aria-panel.open{display:flex}
+    .aria-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,176,55,0.1)}
+    .aria-header-left{display:flex;align-items:center;gap:10px}
+    .aria-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#c9b037,#e0c94a);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:#0d0d0d}
+    .aria-name{font-weight:600;font-size:14px;color:#fff}
+    .aria-status{font-size:11px;color:var(--bpr-gold);font-family:'JetBrains Mono',monospace}
+    .aria-close{background:none;border:none;color:var(--bpr-gray);font-size:18px;cursor:pointer;padding:4px;line-height:1}
+    .aria-close:hover{color:#fff}
+    .aria-messages{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:280px}
+    .aria-msg{max-width:85%;padding:12px 16px;border-radius:12px;font-size:14px;line-height:1.6;animation:msgFadeIn .3s ease}
+    @keyframes msgFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .aria-msg.aria{background:rgba(201,176,55,0.08);border:1px solid rgba(201,176,55,0.12);align-self:flex-start;color:var(--bpr-gray-light)}
+    .aria-msg.user{background:rgba(0,210,255,0.08);border:1px solid rgba(0,210,255,0.12);align-self:flex-end;color:#e0e0e0}
+    .aria-typing{display:flex;gap:4px;padding:12px 16px;align-self:flex-start}
+    .aria-typing span{width:6px;height:6px;background:var(--bpr-gold);border-radius:50%;animation:typing-dot 1.4s infinite}
+    .aria-typing span:nth-child(2){animation-delay:.2s}
+    .aria-typing span:nth-child(3){animation-delay:.4s}
+    .aria-input-area{display:flex;padding:12px 16px;border-top:1px solid rgba(201,176,55,0.1);gap:8px}
+    .aria-input{flex:1;background:rgba(13,13,13,0.6);border:1px solid rgba(201,176,55,0.15);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;font-family:'Inter',sans-serif;resize:none}
+    .aria-input::placeholder{color:var(--bpr-gray)}
+    .aria-input:focus{outline:none;border-color:var(--bpr-gold)}
+    .aria-send{background:var(--bpr-gold);border:none;border-radius:8px;padding:10px 16px;color:#0d0d0d;font-weight:600;cursor:pointer;font-size:14px;transition:all .2s}
+    .aria-send:hover{background:var(--bpr-gold-light)}
+
+    /* ========== DOSSIER MODAL ========== */
+    .dossier-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:10001;display:none;align-items:center;justify-content:center;padding:24px}
+    .dossier-overlay.open{display:flex}
+    .dossier-content{background:var(--bpr-surface);border:1px solid rgba(201,176,55,0.2);border-radius:12px;max-width:700px;width:100%;max-height:85vh;overflow-y:auto;padding:32px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--bpr-gray-light);line-height:1.8;white-space:pre-wrap}
+    .dossier-close{position:absolute;top:16px;right:24px;background:none;border:none;color:var(--bpr-gray);font-size:24px;cursor:pointer}
+
+    /* ========== RESPONSIVE ========== */
+    @media(max-width:1024px){
+      .grid-3{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:768px){
+      .hero-title{font-size:32px!important}
+      .grid-2,.grid-3,.calc-output-grid{grid-template-columns:1fr}
+      .tool-metrics{flex-direction:column;align-items:flex-start;gap:20px}
+      .aria-panel{width:calc(100% - 32px);right:16px;bottom:80px;max-height:70vh}
+      .section-pad{padding:60px 0}
+      .container{padding:0 16px}
+      .compare-table{font-size:13px}
+      .compare-table th,.compare-table td{padding:10px 8px}
+    }
+    @media(max-width:480px){
+      .grid-3{grid-template-columns:1fr}
+      .p-8{padding:20px}
+      .p-10{padding:24px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip to content -->
+<a href="#diagnostico" class="skip-link">Ir para o conteúdo</a>
+
+<!-- Background Grid -->
+<div class="bg-grid" role="presentation" aria-hidden="true"></div>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 1: HERO -->
+<!-- ============================================================ -->
+<section class="hero" id="hero">
+  <div class="badge badge-gold mb-8" style="animation:float 6s ease-in-out infinite">Confidencial &nbsp;|&nbsp; Acesso Restrito</div>
+
+  <h1 class="hero-title glow-gold">
+    Da Imobiliária Que Vende Imóvel<br>Para a Imobiliária Que <em>Pensa</em>
+  </h1>
+
+  <p class="hero-sub">
+    Existe uma transformação silenciosa no mercado imobiliário de luxo. Uma nova geração de Inteligência Artificial não apenas analisa dados — aprende com cada operação, toma decisões em tempo real, e fica mais inteligente a cada mês. Não é um CRM melhor. É uma imobiliária que pensa.
+  </p>
+
+  <a href="#diagnostico" class="scroll-hint" aria-label="Rolar para a próxima seção">
+    <span>Descubra o que existe do outro lado</span>
+    <span class="scroll-arrow" aria-hidden="true">&#8595;</span>
+  </a>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 2: DIAGNÓSTICO (Fase 1 — Ruptura) -->
+<!-- ============================================================ -->
+<section class="section-pad" id="diagnostico">
+  <div class="container">
+    <div class="text-center mb-12 reveal">
+      <div class="badge badge-gold mb-4">O Diagnóstico</div>
+      <h2 class="font-serif" style="font-size:clamp(26px,4vw,42px);font-weight:700;color:#fff;line-height:1.2">
+        Seis Problemas Que Nenhuma<br>Tecnologia Resolvia. <span class="text-gold">Até Agora.</span>
+      </h2>
+    </div>
+
+    <div class="grid-3" style="grid-template-columns:repeat(3,1fr)">
+      <!-- Card 1 -->
+      <div class="glass-card dor-card reveal" style="transition-delay:0s">
+        <div class="dor-icon" role="img" aria-label="Gráfico de receita">📉</div>
+        <div class="dor-title">"Minha receita é uma montanha-russa"</div>
+        <div class="dor-body">Comissão transacional. Fechou, ganhou. Não fechou, zero. Sem como planejar crescimento, contratar ou investir.</div>
+        <div class="dor-stat">Sem receita recorrente</div>
+      </div>
+      <!-- Card 2 -->
+      <div class="glass-card dor-card reveal" style="transition-delay:.1s">
+        <div class="dor-icon" role="img" aria-label="Pessoa saindo">🚪</div>
+        <div class="dor-title">"Meu melhor corretor é meu maior risco"</div>
+        <div class="dor-body">Conhecimento na cabeça das pessoas. Corretor sai, leva clientes e histórico. Sem dados, sem sistema — só dependência.</div>
+        <div class="dor-stat">Zero dados proprietários</div>
+      </div>
+      <!-- Card 3 -->
+      <div class="glass-card dor-card reveal" style="transition-delay:.2s">
+        <div class="dor-icon" role="img" aria-label="Tempo perdido">⏳</div>
+        <div class="dor-title">"Minha equipe gasta 80% do tempo errando"</div>
+        <div class="dor-body">20 visitas por transação. 120 horas executivas desperdiçadas. Custo invisível que ninguém mede.</div>
+        <div class="dor-stat">R$ 45k de custo invisível por deal</div>
+      </div>
+      <!-- Card 4 -->
+      <div class="glass-card dor-card reveal" style="transition-delay:.3s">
+        <div class="dor-icon" role="img" aria-label="Cópia">📋</div>
+        <div class="dor-title">"Não tenho diferenciação real"</div>
+        <div class="dor-body">Qualquer corretor com CRECI faz o que você faz. Sem tecnologia proprietária, sem dado exclusivo. Sem moat.</div>
+        <div class="dor-stat">Concorrente copia tudo amanhã</div>
+      </div>
+      <!-- Card 5 -->
+      <div class="glass-card dor-card reveal" style="transition-delay:.4s">
+        <div class="dor-icon" role="img" aria-label="Documento travado">⚖️</div>
+        <div class="dor-title">"Perco negócios por lentidão jurídica"</div>
+        <div class="dor-body">Due diligence trava deals por semanas. Outro comprador fecha antes. Reputação em risco a cada operação.</div>
+        <div class="dor-stat">15-25 dias de ciclo jurídico</div>
+      </div>
+      <!-- Card 6 -->
+      <div class="glass-card dor-card reveal" style="transition-delay:.5s">
+        <div class="dor-icon" role="img" aria-label="Cliente desaparecendo">👋</div>
+        <div class="dor-title">"Vendo uma vez e nunca mais vejo o cliente"</div>
+        <div class="dor-body">Fecha R$ 10 MM, ganha R$ 300k. Cliente desaparece pra sempre. Sem recorrência, sem fidelização.</div>
+        <div class="dor-stat">O banco ganha pra sempre. Você ganha uma vez.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 3: TRANSIÇÃO Ruptura → Visão -->
+<!-- ============================================================ -->
+<section style="padding:60px 24px" id="transicao1">
+  <div class="container text-center reveal">
+    <div class="gold-divider"></div>
+    <p class="font-serif" style="font-size:clamp(20px,3vw,30px);font-style:italic;color:#fff;max-width:700px;margin:32px auto;line-height:1.5">
+      Esses problemas existem há 30 anos porque ninguém tinha a tecnologia certa. <span class="text-gold">Agora tem.</span>
+    </p>
+    <p class="text-gray-light" style="font-size:16px;max-width:550px;margin:0 auto 32px">
+      Conheça as 5 ferramentas que transformam cada uma dessas dores em vantagem competitiva.
+    </p>
+    <div class="gold-divider"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 4: CRYSTAL BALL ENGINE -->
+<!-- ============================================================ -->
+<section class="tool-section" id="crystal-ball">
+  <div class="container">
+    <div class="reveal">
+      <div class="badge badge-cyan tool-badge">Ferramenta 01</div>
+      <h2 class="tool-tagline">Seu corretor liga pro proprietário<br>antes do imóvel ser listado</h2>
+      <p class="tool-body">O Crystal Ball analisa sinais de disponibilidade futura — inventários, mudanças tributárias, padrões de mercado — e identifica imóveis que entrarão no mercado com antecedência. Sua equipe contata o proprietário antes da listagem pública. Sem concorrência. Comissão garantida.</p>
+    </div>
+
+    <div class="tool-case reveal">
+      <div class="tool-case-title">Caso Simulado</div>
+      <p>Cobertura no Península, R$ 12 MM. Proprietário em processo de inventário — ninguém sabe ainda. O sistema detecta o padrão em janeiro. Seu consultor liga em fevereiro, oferece assessoria discreta. Em março, 40 agências disputariam o mesmo imóvel. Você já fechou sem concorrência.</p>
+    </div>
+
+    <div class="tool-metrics reveal">
+      <div class="tool-metric">
+        <div class="metric-value text-gold counter" data-target="60" data-suffix="-90 dias">0</div>
+        <div class="metric-label">de antecedência</div>
+      </div>
+      <div class="tool-metric">
+        <div class="metric-value text-cyan counter" data-target="70" data-suffix="-80%">0</div>
+        <div class="metric-label">menos concorrência</div>
+      </div>
+    </div>
+
+    <p class="tool-closing reveal">E fica mais inteligente a cada operação na sua região.</p>
+    <div class="gold-divider"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 5: DIGITAL TWIN -->
+<!-- ============================================================ -->
+<section class="tool-section" id="digital-twin">
+  <div class="container">
+    <div class="reveal">
+      <div class="badge badge-gold tool-badge">Ferramenta 02</div>
+      <h2 class="tool-tagline">De 20 visitas frustradas<br>para 3 certeiras</h2>
+      <p class="tool-body">Cria um perfil comportamental completo do comprador na primeira reunião. Vai além de metragem e orçamento — analisa padrão de vida, rotina, preferências implícitas. Sua equipe apresenta 3-5 opções qualificadas em vez de 20 genéricas.</p>
+    </div>
+
+    <div class="tool-case reveal">
+      <div class="tool-case-title">Caso Simulado</div>
+      <p>Executiva, 38 anos, CFO de multinacional. Diz: "Quero 4 quartos na Barra, até R$ 8 MM." Corretor tradicional mostra 22 opções. Ela visita 15, odeia todas. Desiste. Com Digital Twin: o sistema identifica que o padrão real dela é proximidade do colégio Eleva + home office com vista + condomínio com segurança sem clube social. Resultado: 3 opções. Compra na segunda visita.</p>
+    </div>
+
+    <div class="tool-metrics reveal">
+      <div class="tool-metric">
+        <div class="metric-value text-gold counter" data-target="3" data-suffix="-5">0</div>
+        <div class="metric-label">visitas em vez de 20</div>
+      </div>
+      <div class="tool-metric">
+        <div class="metric-value text-cyan counter" data-target="70" data-suffix="-80%">0</div>
+        <div class="metric-label">menos visitas improdutivas</div>
+      </div>
+    </div>
+
+    <p class="tool-closing reveal">E fica mais inteligente a cada operação na sua região.</p>
+    <div class="gold-divider"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 6: LEGAL INTELLIGENCE -->
+<!-- ============================================================ -->
+<section class="tool-section" id="legal-intel">
+  <div class="container">
+    <div class="reveal">
+      <div class="badge badge-cyan tool-badge">Ferramenta 03</div>
+      <h2 class="tool-tagline">Due diligence de 25 dias para 5.<br>Seu advogado agradece.</h2>
+      <p class="tool-body">Coleta automaticamente certidões, cruza dados de matrícula com cartório, verifica IPTU, débitos condominiais, ações judiciais. Monta dossiê estruturado com flags de risco e entrega pro advogado validar. O ciclo jurídico cai de semanas para dias.</p>
+    </div>
+
+    <div class="tool-case reveal">
+      <div class="tool-case-title">Caso Simulado</div>
+      <p>Cobertura no Jardim Oceânico, R$ 9 MM. Comprador quer fechar em 30 dias. Modelo tradicional: advogado começa DD no dia 1. Dia 15, descobre cláusula atípica. Dia 25, parecer final. Cliente quase desistiu. Com Legal Intelligence: dia 1, sistema cruza tudo em 3 horas. Dossiê pronto com flags. Advogado valida em 4 horas. Dia 5, parecer final. Deal salvo.</p>
+    </div>
+
+    <div class="tool-metrics reveal">
+      <div class="tool-metric">
+        <div class="metric-value text-gold counter" data-target="3" data-suffix="-5 dias">0</div>
+        <div class="metric-label">em vez de 25</div>
+      </div>
+      <div class="tool-metric">
+        <div class="metric-value text-cyan counter" data-target="3" data-suffix=" horas">0</div>
+        <div class="metric-label">dossiê estruturado</div>
+      </div>
+    </div>
+
+    <p class="tool-closing reveal">E fica mais inteligente a cada operação na sua região.</p>
+    <div class="gold-divider"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 7: NEGOCIAÇÃO ALGORÍTMICA -->
+<!-- ============================================================ -->
+<section class="tool-section" id="negociacao">
+  <div class="container">
+    <div class="reveal">
+      <div class="badge badge-gold tool-badge">Ferramenta 04</div>
+      <h2 class="tool-tagline">Sua equipe inteira negocia como<br>seu melhor corretor. <span class="text-gold">Sempre.</span></h2>
+      <p class="tool-body">Analisa tempo de mercado, perfil do vendedor, comparáveis recentes e pressão de liquidez. Simula cenários e recomenda a estratégia ótima. O mercado de luxo já negocia 8-12% abaixo do asking — o algoritmo sistematiza a captura desse desconto com toda a equipe, não só com o melhor corretor.</p>
+    </div>
+
+    <div class="tool-case reveal">
+      <div class="tool-case-title">Caso Simulado</div>
+      <p>Imóvel de R$ 10 MM. Vendedor motivado — divórcio, prazo judicial de 45 dias. Corretor tradicional: oferece R$ 9,5 MM, negocia instintivamente, fecha a R$ 9,8 MM. Economia: R$ 200k. Com o motor algorítmico: identifica urgência, compara dados reais de m², e recomenda oferta rápida com closing acelerado. Fecha a R$ 9,08 MM. Economia: R$ 920k.</p>
+    </div>
+
+    <div class="tool-metrics reveal">
+      <div class="tool-metric">
+        <div class="metric-value text-gold counter" data-target="9.2" data-suffix="%">0</div>
+        <div class="metric-label">economia média por transação</div>
+      </div>
+      <div class="tool-metric">
+        <div class="metric-value text-cyan" style="font-size:clamp(28px,4vw,40px);font-weight:600">R$ 920k</div>
+        <div class="metric-label">em um imóvel de R$ 10 MM</div>
+      </div>
+    </div>
+
+    <p class="tool-closing reveal">E fica mais inteligente a cada operação na sua região.</p>
+    <div class="gold-divider"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 8: FIDELIZAÇÃO INTELIGENTE -->
+<!-- ============================================================ -->
+<section class="tool-section" id="fidelizacao">
+  <div class="container">
+    <div class="reveal">
+      <div class="badge badge-cyan tool-badge">Ferramenta 05</div>
+      <h2 class="tool-tagline">Seu cliente nunca mais<br>esquece de você</h2>
+      <p class="tool-body">Após a aquisição, o sistema gera automaticamente relatórios periódicos de posicionamento patrimonial: quanto vale o imóvel hoje, comparáveis recentes, tendências da região. Você mantém contato legítimo sem parecer que está vendendo.</p>
+    </div>
+
+    <div class="grid-2 mt-6 reveal">
+      <div class="glass-card p-6">
+        <div class="badge badge-gold mb-3" style="font-size:10px">Clientes Moradores</div>
+        <p class="tool-body" style="margin:0;font-size:14px">Relatório semestral de fidelização incluso. Custo operacional quase zero (gerado pela IA). O cliente lembra de você, indica amigos, volta na próxima transação.</p>
+      </div>
+      <div class="glass-card p-6">
+        <div class="badge badge-cyan mb-3" style="font-size:10px">Clientes Investidores</div>
+        <p class="tool-body" style="margin:0;font-size:14px">Gestão ativa de portfólio com fee de administração. Pricing algorítmico de aluguel, análise de vacância preditiva, timing de saída otimizado. Receita recorrente real.</p>
+      </div>
+    </div>
+
+    <div class="tool-case reveal mt-6">
+      <div class="tool-case-title">Caso Simulado</div>
+      <p>20 clientes HNWI no Ano 1. Cada um recebe relatório semestral personalizado. No Ano 2: 5 indicações, 3 retornos para segunda transação. Sem o relatório, esses 8 clientes teriam ido para o concorrente. E à medida que a base cresce, o sistema começa a conectar compradores e vendedores automaticamente — efeito rede.</p>
+    </div>
+
+    <p class="tool-closing reveal mt-6">E fica mais inteligente a cada operação na sua região.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 9: TRANSIÇÃO Visão → Prova -->
+<!-- ============================================================ -->
+<section style="padding:60px 24px" id="transicao2">
+  <div class="container text-center reveal">
+    <div class="gold-divider"></div>
+    <p class="font-serif" style="font-size:clamp(20px,3vw,30px);font-style:italic;color:#fff;max-width:600px;margin:32px auto;line-height:1.5">
+      Não acredite em nós.<br><span class="text-gold">Faça a conta você mesmo.</span>
+    </p>
+    <div class="gold-divider"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 10: CALCULADORA DE ROI + COMPARATIVO -->
+<!-- ============================================================ -->
+<section class="section-pad" id="calculadora">
+  <div class="container">
+    <div class="text-center mb-12 reveal">
+      <div class="badge badge-gold mb-4">Prova</div>
+      <h2 class="font-serif" style="font-size:clamp(26px,4vw,38px);font-weight:700;color:#fff">
+        Calculadora de Impacto
+      </h2>
+      <p class="text-gray-light mt-4" style="max-width:550px;margin-left:auto;margin-right:auto">Coloque os números da sua operação e veja o que muda.</p>
+    </div>
+
+    <div class="calc-section reveal">
+      <div class="grid-2" style="gap:32px">
+        <div>
+          <!-- Input 1: Ticket Médio -->
+          <div class="calc-input-group">
+            <label for="calc-ticket" class="calc-label">Ticket médio dos imóveis (R$)</label>
+            <input type="text" id="calc-ticket" class="calc-input" value="7.000.000" aria-label="Ticket médio em reais" readonly>
+            <input type="range" id="calc-ticket-slider" class="calc-slider" min="2000000" max="25000000" step="500000" value="7000000" aria-label="Ajustar ticket médio">
+          </div>
+          <!-- Input 2: Transações/ano -->
+          <div class="calc-input-group">
+            <label for="calc-trans" class="calc-label">Transações por ano</label>
+            <input type="text" id="calc-trans" class="calc-input" value="15" readonly>
+            <input type="range" id="calc-trans-slider" class="calc-slider" min="5" max="50" step="1" value="15" aria-label="Ajustar número de transações">
+          </div>
+          <!-- Input 3: Corretores -->
+          <div class="calc-input-group">
+            <label for="calc-team" class="calc-label">Corretores na equipe</label>
+            <input type="text" id="calc-team" class="calc-input" value="5" readonly>
+            <input type="range" id="calc-team-slider" class="calc-slider" min="1" max="15" step="1" value="5" aria-label="Ajustar número de corretores">
+          </div>
+        </div>
+
+        <div class="calc-output-grid" style="align-content:start">
+          <div class="calc-output gold-out">
+            <div class="out-value text-gold" id="out-economia-deal">R$ 644k</div>
+            <div class="out-label">Economia por transação</div>
+          </div>
+          <div class="calc-output cyan-out">
+            <div class="out-value text-cyan" id="out-economia-total">R$ 9,66 MM</div>
+            <div class="out-label">Economia total anual</div>
+          </div>
+          <div class="calc-output gold-out">
+            <div class="out-value text-gold" id="out-horas">100h</div>
+            <div class="out-label">Horas recuperadas / mês</div>
+          </div>
+          <div class="calc-output cyan-out">
+            <div class="out-value text-cyan" id="out-receita">R$ 5,04 MM</div>
+            <div class="out-label">Receita incremental Ano 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabela Comparativa -->
+    <div class="glass-card p-8 mt-12 reveal">
+      <h3 class="font-serif text-center mb-6" style="font-size:22px;color:#fff">Antes e Depois</h3>
+      <div style="overflow-x:auto">
+        <table class="compare-table" role="table" aria-label="Comparativo antes e depois do BPR Intelligence">
+          <thead>
+            <tr>
+              <th scope="col">Métrica</th>
+              <th scope="col">Sem BPR</th>
+              <th scope="col">Com BPR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Visitas por transação</td><td class="col-sem">15-20</td><td class="col-com">3-5</td></tr>
+            <tr><td>Ciclo de due diligence</td><td class="col-sem">15-25 dias</td><td class="col-com">3-5 dias</td></tr>
+            <tr><td>Economia na negociação</td><td class="col-sem">2-4% (instinto)</td><td class="col-com">8-12% (algorítmico)</td></tr>
+            <tr><td>Retenção de cliente</td><td class="col-sem">Uma transação</td><td class="col-com">Relacionamento contínuo</td></tr>
+            <tr><td>Dados proprietários</td><td class="col-sem">Zero</td><td class="col-com">Acumulam com cada operação</td></tr>
+            <tr><td>Dependência do corretor</td><td class="col-sem">Total</td><td class="col-com">Mínima (dados ficam na empresa)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 11: EXCLUSIVIDADE (Fase 4) -->
+<!-- ============================================================ -->
+<section class="section-pad" id="exclusividade">
+  <div class="container">
+    <div class="text-center mb-12 reveal">
+      <div class="badge badge-gold mb-4">Vantagem Competitiva</div>
+      <h2 class="font-serif" style="font-size:clamp(26px,4vw,42px);font-weight:700;color:#fff">
+        Quem Planta Primeiro,<br><span class="text-gold">Colhe Primeiro</span>
+      </h2>
+    </div>
+
+    <div class="grid-3 mb-12">
+      <div class="glass-card excl-card reveal" style="transition-delay:0s">
+        <div style="font-size:28px;margin-bottom:16px" role="img" aria-label="Cérebro">🧠</div>
+        <div class="excl-title">Inteligência Acumulativa</div>
+        <div class="excl-body">Os algoritmos aprendem com cada operação na sua região. 18 meses de dados = vantagem impossível de replicar. O concorrente que chegar depois começa do zero.</div>
+      </div>
+      <div class="glass-card excl-card reveal" style="transition-delay:.1s">
+        <div style="font-size:28px;margin-bottom:16px" role="img" aria-label="Mapa">📍</div>
+        <div class="excl-title">Exclusividade Territorial</div>
+        <div class="excl-body">Um operador por região. Não é escassez artificial — é lógica de negócio. Dois operadores com a mesma inteligência na mesma região se canibalizariam.</div>
+      </div>
+      <div class="glass-card excl-card reveal" style="transition-delay:.2s">
+        <div style="font-size:28px;margin-bottom:16px" role="img" aria-label="Janela de tempo">⏰</div>
+        <div class="excl-title">Janela de Mercado</div>
+        <div class="excl-body">Três forças convergindo: maturidade da IA agêntica, evolução do HNWI brasileiro, saturação do mercado premium. Em 24 meses, bancos e fintechs ocupam esse espaço.</div>
+      </div>
+    </div>
+
+    <div class="text-center reveal">
+      <p class="font-serif" style="font-size:clamp(18px,2.5vw,24px);font-style:italic;color:var(--bpr-gold);max-width:600px;margin:0 auto;opacity:.85">
+        "Quem planta primeiro, colhe primeiro. E quem colhe primeiro, colhe mais."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 12: CTA + FOOTER -->
+<!-- ============================================================ -->
+<section class="cta-section" id="contato">
+  <div class="container">
+    <div class="reveal">
+      <div class="badge badge-gold mb-6">Próximo Passo</div>
+      <h2 class="font-serif mb-4" style="font-size:clamp(28px,4.5vw,46px);font-weight:700;color:#fff">
+        Tem Perguntas?<br>Converse com a <span class="text-gold">Aria</span>
+      </h2>
+      <p class="text-gray-light mb-8" style="font-size:17px;max-width:560px;margin-left:auto;margin-right:auto">
+        Nossa assistente de inteligência conhece o ecossistema BPR em profundidade. Converse com ela — sem compromisso, sem formulário. Se fizer sentido, nossa equipe entrará em contato.
+      </p>
+      <button onclick="document.getElementById('ariaToggle').click()" class="cta-btn cta-btn-gold animate-pulse-gold" aria-label="Abrir chat com a Aria">
+        Conversar com a Aria &nbsp;→
+      </button>
+    </div>
+
+    <div class="gold-divider" style="margin:60px auto 40px"></div>
+
+    <p class="font-serif reveal" style="font-size:clamp(16px,2.5vw,22px);font-style:italic;color:var(--bpr-gold);opacity:.7">
+      Da imobiliária que vende imóvel para a imobiliária que pensa.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>BPR Intelligence &nbsp;|&nbsp; Brasil</p>
+  <p style="margin-top:8px;letter-spacing:1px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--bpr-gold);opacity:.5">Confidencial &nbsp;|&nbsp; Distribuição restrita a decisores qualificados</p>
+  <p style="margin-top:8px">&copy; 2026 BPR Intelligence. Todos os direitos reservados.</p>
+</footer>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO 13: ARIA — Assistente Inteligente BPR (Chat Flutuante) -->
+<!-- ============================================================ -->
+
+<!-- Toggle Button -->
+<button class="aria-toggle has-unread" id="ariaToggle" aria-label="Abrir assistente Aria" title="Falar com a Aria">A</button>
+<div class="aria-hint" id="ariaHint"><span class="aria-hint-text">Pergunte à Aria</span><span class="aria-hint-arrow">›</span></div>
+
+<!-- Chat Panel -->
+<div class="aria-panel" id="ariaPanel" role="dialog" aria-label="Chat com Aria, assistente BPR Intelligence">
+  <div class="aria-header">
+    <div class="aria-header-left">
+      <div class="aria-avatar" aria-hidden="true">A</div>
+      <div>
+        <div class="aria-name">Aria</div>
+        <div class="aria-status">Online</div>
+      </div>
+    </div>
+    <button class="aria-close" id="ariaClose" aria-label="Fechar chat">&times;</button>
+  </div>
+  <div class="aria-messages" id="ariaMessages" role="log" aria-live="polite"></div>
+  <div class="aria-input-area">
+    <input type="text" class="aria-input" id="ariaInput" placeholder="Pergunte sobre o ecossistema BPR..." aria-label="Digite sua mensagem">
+    <button class="aria-send" id="ariaSend" aria-label="Enviar mensagem">Enviar</button>
+  </div>
+</div>
+
+<!-- Dossier Modal -->
+<div class="dossier-overlay" id="dossierOverlay" role="dialog" aria-label="Dossiê do prospect">
+  <div style="position:relative;max-width:700px;width:100%">
+    <button class="dossier-close" id="dossierClose" aria-label="Fechar dossiê">&times;</button>
+    <div class="dossier-content" id="dossierContent"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script>
+/* ==========================================================
+   PROTEÇÕES ANTI-CLONE
+   ========================================================== */
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+// Disable text selection on body (keep in inputs)
+document.addEventListener('selectstart', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  e.preventDefault();
+});
+// Disable common keyboard shortcuts (Ctrl+U, Ctrl+S, Ctrl+Shift+I, Ctrl+Shift+J, F12)
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12') { e.preventDefault(); return; }
+  if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return; }
+  if (e.ctrlKey && e.key === 's') { e.preventDefault(); return; }
+  if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) { e.preventDefault(); return; }
+  if (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) { e.preventDefault(); return; }
+});
+// Disable drag
+document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+/* ==========================================================
+   REVEAL ANIMATIONS (IntersectionObserver)
+   ========================================================== */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => revealObs.observe(el));
+
+/* ==========================================================
+   COUNTER ANIMATION
+   ========================================================== */
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const prefix = el.dataset.prefix || '';
+  const duration = 2000;
+  const start = performance.now();
+  const dec = target % 1 !== 0;
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const v = target * eased;
+    el.textContent = prefix + (dec ? v.toFixed(1) : Math.floor(v)) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const cObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.animated) {
+      e.target.dataset.animated = 'true';
+      animateCounter(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => cObs.observe(el));
+
+/* ==========================================================
+   CALCULADORA DE ROI
+   ========================================================== */
+(function() {
+  const sliderTicket = document.getElementById('calc-ticket-slider');
+  const sliderTrans = document.getElementById('calc-trans-slider');
+  const sliderTeam = document.getElementById('calc-team-slider');
+  const inputTicket = document.getElementById('calc-ticket');
+  const inputTrans = document.getElementById('calc-trans');
+  const inputTeam = document.getElementById('calc-team');
+  const outEcDeal = document.getElementById('out-economia-deal');
+  const outEcTotal = document.getElementById('out-economia-total');
+  const outHoras = document.getElementById('out-horas');
+  const outReceita = document.getElementById('out-receita');
+
+  function fmtBRL(v) {
+    if (v >= 1e6) return 'R$ ' + (v / 1e6).toFixed(2).replace('.', ',') + ' MM';
+    if (v >= 1e3) return 'R$ ' + (v / 1e3).toFixed(0) + 'k';
+    return 'R$ ' + v.toFixed(0);
+  }
+  function fmtInput(v) {
+    return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  function calc() {
+    const ticket = parseInt(sliderTicket.value);
+    const trans = parseInt(sliderTrans.value);
+    const team = parseInt(sliderTeam.value);
+
+    inputTicket.value = fmtInput(ticket);
+    inputTrans.value = trans;
+    inputTeam.value = team;
+
+    const ecDeal = ticket * 0.092;
+    const ecTotal = ecDeal * trans;
+    const horas = team * 20;
+    // buyer fee (3%) on 50% more transactions + AUM fee projection (1% on 30% of clients)
+    const receita = (trans * 1.5 * ticket * 0.03) + (trans * 0.3 * ticket * 0.01);
+
+    outEcDeal.textContent = fmtBRL(ecDeal);
+    outEcTotal.textContent = fmtBRL(ecTotal);
+    outHoras.textContent = horas + 'h';
+    outReceita.textContent = fmtBRL(receita);
+
+    // Track for Aria
+    if (window._ariaCalc) window._ariaCalc({ ticket, trans, team });
+  }
+
+  sliderTicket.addEventListener('input', calc);
+  sliderTrans.addEventListener('input', calc);
+  sliderTeam.addEventListener('input', calc);
+  calc();
+})();
+
+/* ==========================================================
+   SECTION TRACKING (para Aria behavioral analytics)
+   ========================================================== */
+const sectionIds = ['hero','diagnostico','crystal-ball','digital-twin','legal-intel','negociacao','fidelizacao','calculadora','exclusividade','contato'];
+const secObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && window._ariaTrackSection) {
+      const id = e.target.id;
+      if (id) window._ariaTrackSection(id);
+    }
+  });
+}, { threshold: 0.3 });
+sectionIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) secObs.observe(el);
+});
+
+/* ==========================================================
+   ARIA ENGINE v2 — Lead Capture + 5 Fases + Supabase Persistence
+   ========================================================== */
+(function() {
+  const ARIA_API = 'https://bpr-aria-proxy.vercel.app/api/aria';
+  const TRACK_API = 'https://bpr-aria-proxy.vercel.app/api/track';
+
+  /* --- SessionId persistente (localStorage — sobrevive ao fechar tab) --- */
+  function uuid() { return 'xxxx-xxxx-xxxx-xxxx'.replace(/x/g, () => (Math.random()*16|0).toString(16)); }
+  function getSessionId() {
+    let sid = null;
+    try { sid = localStorage.getItem('bpr_sid'); } catch(e) {}
+    if (!sid) {
+      sid = uuid();
+      try { localStorage.setItem('bpr_sid', sid); } catch(e) {}
+    }
+    return sid;
+  }
+  const SESSION_ID = getSessionId();
+
+  /* --- Prospect Profile --- */
+  const P = {
+    timestamp: Date.now(), sessionId: SESSION_ID,
+    nome: '', sobrenome: '', empresa: '', email: '', whatsapp: '', telefone: '',
+    regiao: '', ticketMedio: '', tamanhoEquipe: '', usoTecnologia: '', principalDor: '',
+    tempoNoSite: 0, secoesVisitadas: [], tempoNaCalculadora: 0, valoresCalculadora: {},
+    perguntasFeitas: [], mensagensTotal: 0,
+    nivelInteresse: 'curioso', nivelTecnologia: 'tradicional', potencialEstimado: 'medio',
+    faseConversa: 1
+  };
+  try {
+    const saved = localStorage.getItem('bpr_p');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.sessionId === SESSION_ID) Object.assign(P, parsed);
+    }
+  } catch(e) {}
+
+  function saveProfile() {
+    P.tempoNoSite = Math.floor((Date.now() - P.timestamp) / 60000);
+    try { localStorage.setItem('bpr_p', JSON.stringify(P)); } catch(e) {}
+  }
+  setInterval(saveProfile, 10000);
+
+  // Expose limited interface for calculator and section tracking
+  window._ariaTrack = function(k, v) { if (k in P) P[k] = v; };
+  window._ariaTrackSection = function(s) {
+    if (!P.secoesVisitadas.includes(s)) {
+      P.secoesVisitadas.push(s);
+      trackEvent('section_view', { section: s });
+    }
+  };
+  window._ariaCalc = function(d) {
+    P.valoresCalculadora = d;
+    P.tempoNaCalculadora++;
+    trackEvent('calculator_use', d);
+  };
+
+  /* --- Behavioral Tracking (fire-and-forget) --- */
+  function trackEvent(eventType, eventData) {
+    fetch(TRACK_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId: SESSION_ID, eventType, eventData })
+    }).catch(() => {});
+  }
+
+  // Track page view
+  trackEvent('page_view', { url: location.pathname, referrer: document.referrer });
+
+  /* --- Fase da conversa (auto-calculada) --- */
+  function updateFase() {
+    const m = P.mensagensTotal;
+    const hasContact = !!(P.email || P.whatsapp);
+    if (hasContact && m >= 9) { P.faseConversa = 5; }
+    else if (m >= 9) { P.faseConversa = 4; }
+    else if (m >= 6) { P.faseConversa = 3; }
+    else if (m >= 3) { P.faseConversa = 2; }
+    else { P.faseConversa = 1; }
+  }
+
+  /* --- Conversation History --- */
+  const conversationHistory = [];
+
+  /* --- Rate limit client-side --- */
+  let lastSent = 0;
+  const MIN_INTERVAL = 2000;
+
+  /* --- Build context for LLM --- */
+  function buildContext() {
+    const fields = {
+      nome: P.nome, empresa: P.empresa, 'região': P.regiao,
+      ticket: P.ticketMedio, equipe: P.tamanhoEquipe,
+      tecnologia: P.usoTecnologia, dor: P.principalDor,
+      email: P.email, whatsapp: P.whatsapp
+    };
+    const collected = Object.entries(fields).filter(([,v]) => v).map(([k,v]) => k + ': ' + v).join('. ');
+    const missing = Object.entries(fields).filter(([,v]) => !v).map(([k]) => k).join(', ');
+
+    let ctx = '[FASE ATUAL: ' + P.faseConversa + '/5] ';
+    ctx += '[DADOS COLETADOS: ' + (collected || 'nenhum') + '] ';
+    ctx += '[FALTA COLETAR: ' + (missing || 'nenhum') + '] ';
+    ctx += '[MSGS: ' + P.mensagensTotal + '] ';
+    ctx += '[SEÇÕES VISITADAS: ' + (P.secoesVisitadas.join(', ') || 'nenhuma') + '] ';
+    if (P.valoresCalculadora.ticket) {
+      ctx += '[CALCULADORA: ' + (P.valoresCalculadora.ticket/1e6).toFixed(1) + 'MM, ' + P.valoresCalculadora.trans + ' trans, ' + P.valoresCalculadora.team + ' corretores] ';
+    }
+    ctx += '[INTERESSE: ' + P.nivelInteresse + '] [POTENCIAL: ' + P.potencialEstimado + ']';
+    return ctx;
+  }
+
+  /* --- Build fields for Supabase persistence --- */
+  function buildFields() {
+    return {
+      nome: P.nome || undefined,
+      sobrenome: P.sobrenome || undefined,
+      email: P.email || undefined,
+      whatsapp: P.whatsapp || undefined,
+      telefone: P.telefone || undefined,
+      empresa: P.empresa || undefined,
+      regiao: P.regiao || undefined,
+      ticketMedio: P.ticketMedio || undefined,
+      tamanhoEquipe: P.tamanhoEquipe || undefined,
+      principalDor: P.principalDor || undefined,
+      usoTecnologia: P.usoTecnologia || undefined,
+      nivelInteresse: P.nivelInteresse,
+      perfilTecnologico: P.nivelTecnologia,
+      potencialEstimado: P.potencialEstimado,
+      faseConversa: P.faseConversa,
+      mensagensTotal: P.mensagensTotal,
+      secoesVisitadas: P.secoesVisitadas,
+      valoresCalculadora: P.valoresCalculadora
+    };
+  }
+
+  /* --- Proxy LLM Call --- */
+  async function callLLM(userMsg) {
+    const now = Date.now();
+    if (now - lastSent < MIN_INTERVAL) {
+      return 'Um momento, estou processando...';
+    }
+    lastSent = now;
+
+    P.mensagensTotal++;
+    P.perguntasFeitas.push(userMsg.slice(0, 200));
+    updateFase();
+
+    conversationHistory.push({ role: 'user', content: userMsg });
+    const messages = conversationHistory.slice(-20);
+
+    try {
+      const resp = await fetch(ARIA_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Aria-Session': SESSION_ID
+        },
+        body: JSON.stringify({
+          messages,
+          context: buildContext(),
+          sessionId: SESSION_ID,
+          fields: buildFields()
+        })
+      });
+
+      if (!resp.ok) {
+        if (resp.status === 429) return 'Muitas mensagens em pouco tempo. Aguarde um momento.';
+        return 'Desculpe, estou com uma instabilidade momentânea. Tente novamente em alguns segundos.';
+      }
+
+      const data = await resp.json();
+      const reply = data.reply || 'Desculpe, não consegui processar. Pode reformular?';
+
+      conversationHistory.push({ role: 'assistant', content: reply });
+      extractProspectData(userMsg);
+      extractProspectDataFromReply(reply);
+
+      if (P.mensagensTotal >= 7) { P.nivelInteresse = 'pronto'; P.potencialEstimado = 'alto'; }
+      else if (P.mensagensTotal >= 4) { P.nivelInteresse = 'interessado'; }
+
+      updateFase();
+      saveProfile();
+      trackEvent('chat_message', { fase: P.faseConversa, msgCount: P.mensagensTotal });
+
+      return reply;
+    } catch(e) {
+      return 'Desculpe, estou com uma instabilidade momentânea. Tente novamente em alguns segundos.';
+    }
+  }
+
+  /* --- Extract prospect data from user messages --- */
+  function extractProspectData(msg) {
+    const lower = msg.toLowerCase();
+    // Email
+    if (/\S+@\S+\.\S+/.test(msg)) P.email = msg.match(/\S+@\S+\.\S+/)[0];
+    // WhatsApp / Phone
+    if (/\d{10,}/.test(msg.replace(/\D/g, ''))) {
+      const d = msg.replace(/\D/g, '');
+      if (d.length >= 10) P.whatsapp = msg.match(/[\d\s()+-]{10,}/)?.[0]?.trim() || msg;
+    }
+    // Região
+    if (/barra|leblon|ipanema|botafogo|zona sul|niter[oó]i|recreio|jardim|copacabana|alphaville|morumbi|itaim|jardins|vila nova|pinheiros|higienópolis/i.test(msg)) P.regiao = P.regiao || msg.trim();
+    // Ticket
+    if (/\d+\s*(mm|milhão|milhões|mi\b)/i.test(msg)) P.ticketMedio = P.ticketMedio || msg.match(/[\d.,]+\s*(mm|milhão|milhões|mi\b)/i)?.[0];
+    // Equipe
+    if (/\d+\s*(corretor|consultor|pessoa|profission)/i.test(msg)) P.tamanhoEquipe = P.tamanhoEquipe || msg.match(/\d+/)?.[0];
+    // Tecnologia
+    if (/crm|salesforce|hubspot|planilha|excel/i.test(lower)) P.usoTecnologia = P.usoTecnologia || msg;
+    // Nome (short non-question, capitalized)
+    if (!P.nome && msg.length < 40 && !lower.includes('?') && /^[A-ZÀ-Ú][a-zà-ú]+(\s[A-ZÀ-Ú][a-zà-ú]+)*$/.test(msg.trim())) {
+      const parts = msg.trim().split(/\s+/);
+      P.nome = parts[0];
+      if (parts.length > 1) P.sobrenome = parts.slice(1).join(' ');
+    }
+    // Tech level
+    if (/crm|api|ia\b|machine|automac|dashboard/i.test(lower)) P.nivelTecnologia = 'tech-forward';
+    else if (/planilha|excel|manual|papel/i.test(lower)) P.nivelTecnologia = 'tradicional';
+    // Potencial estimado
+    if (P.valoresCalculadora.ticket > 10000000) P.potencialEstimado = 'premium';
+    else if (P.valoresCalculadora.ticket > 5000000) P.potencialEstimado = 'alto';
+  }
+
+  /* --- Extract data from Aria replies (em caso do prospect confirmar dados na conversa) --- */
+  function extractProspectDataFromReply(reply) {
+    // Aria pode confirmar nome do prospect
+    const nameMatch = reply.match(/(?:Perfeito|Obrigad[ao]|Prazer),?\s+([A-ZÀ-Ú][a-zà-ú]+)/);
+    if (nameMatch && !P.nome) P.nome = nameMatch[1];
+  }
+
+  /* --- Chat UI --- */
+  const panel = document.getElementById('ariaPanel');
+  const toggle = document.getElementById('ariaToggle');
+  const closeBtn = document.getElementById('ariaClose');
+  const msgsEl = document.getElementById('ariaMessages');
+  const inputEl = document.getElementById('ariaInput');
+  const sendBtn = document.getElementById('ariaSend');
+  let chatOpened = false;
+  let sending = false;
+
+  function addMsg(text, sender) {
+    const div = document.createElement('div');
+    div.className = 'aria-msg ' + sender;
+    div.textContent = text;
+    msgsEl.appendChild(div);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }
+
+  function showTyping() {
+    const t = document.createElement('div');
+    t.className = 'aria-typing';
+    t.id = 'ariaTyping';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    msgsEl.appendChild(t);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }
+  function hideTyping() {
+    const t = document.getElementById('ariaTyping');
+    if (t) t.remove();
+  }
+
+  const hintEl = document.getElementById('ariaHint');
+  function openChat() {
+    panel.classList.add('open');
+    toggle.classList.remove('has-unread');
+    if (hintEl) hintEl.style.display = 'none';
+    if (!chatOpened) {
+      chatOpened = true;
+      trackEvent('chat_open', { fase: P.faseConversa });
+      showTyping();
+      callLLM('[SISTEMA: O usuário acabou de abrir o chat pela primeira vez. Você está na FASE 1 — ACOLHIMENTO. Apresente-se como Aria da BPR Intelligence (mencione BPR Intelligence por nome). Pergunte o nome dele e o que o trouxe aqui. 2-3 frases no máximo, tom acolhedor. NÃO liste ferramentas.]').then(reply => {
+        hideTyping();
+        addMsg(reply, 'aria');
+      });
+    }
+    inputEl.focus();
+  }
+  function closeChat() { panel.classList.remove('open'); }
+
+  toggle.addEventListener('click', () => { panel.classList.contains('open') ? closeChat() : openChat(); });
+  closeBtn.addEventListener('click', closeChat);
+
+  async function sendMessage() {
+    const msg = inputEl.value.trim();
+    if (!msg || sending) return;
+
+    sending = true;
+    addMsg(msg, 'user');
+    inputEl.value = '';
+    inputEl.disabled = true;
+    sendBtn.disabled = true;
+
+    showTyping();
+    const reply = await callLLM(msg);
+    hideTyping();
+    addMsg(reply, 'aria');
+
+    sending = false;
+    inputEl.disabled = false;
+    sendBtn.disabled = false;
+    inputEl.focus();
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sendMessage(); } });
+
+  /* --- Dossier Generation --- */
+  function generateDossier() {
+    const p = P;
+    const now = new Date();
+    const dateStr = now.toLocaleString('pt-BR');
+    const mins = Math.floor((Date.now() - p.timestamp) / 60000);
+
+    let recText = '';
+    if (p.principalDor) recText = 'Prospect mencionou dor principal em: "' + p.principalDor + '". ';
+    if (p.nivelTecnologia === 'tradicional') recText += 'Perfil tradicional — evitar jargão técnico na apresentação. Focar em resultados e casos práticos.';
+    else if (p.nivelTecnologia === 'tech-forward') recText += 'Perfil tech-forward — pode aprofundar em capacidades técnicas. Demonstrar sofisticação do sistema.';
+    else recText += 'Perfil em transição — equilibrar resultados práticos com demonstração de tecnologia.';
+
+    return '═══════════════════════════════════════════\n' +
+      'DOSSIÊ DE PROSPECT — BPR Intelligence\n' +
+      'Data: ' + dateStr + '\n' +
+      'Session ID: ' + p.sessionId + '\n' +
+      'Fase da conversa: ' + p.faseConversa + '/5\n' +
+      '═══════════════════════════════════════════\n\n' +
+      'DADOS DO PROSPECT\n' +
+      'Nome: ' + (p.nome ? p.nome + (p.sobrenome ? ' ' + p.sobrenome : '') : '(não informado)') + '\n' +
+      'Empresa: ' + (p.empresa || '(não informado)') + '\n' +
+      'Região: ' + (p.regiao || '(não informado)') + '\n' +
+      'E-mail: ' + (p.email || '(não informado)') + '\n' +
+      'WhatsApp: ' + (p.whatsapp || '(não informado)') + '\n\n' +
+      'PERFIL DO NEGÓCIO\n' +
+      'Ticket médio: ' + (p.ticketMedio || '(não informado)') + '\n' +
+      'Equipe: ' + (p.tamanhoEquipe || '(não informado)') + ' consultores\n' +
+      'Tecnologia atual: ' + (p.usoTecnologia || '(não informado)') + '\n' +
+      'Principal dor: ' + (p.principalDor || '(não informado)') + '\n\n' +
+      'ANÁLISE COMPORTAMENTAL\n' +
+      'Tempo no site: ' + mins + ' minutos\n' +
+      'Seções visitadas: ' + (p.secoesVisitadas.join(', ') || 'nenhuma') + '\n' +
+      'Usou calculadora: ' + (p.tempoNaCalculadora > 0 ? 'Sim' : 'Não') + '\n' +
+      (p.valoresCalculadora.ticket ? '  └ Ticket ' + (p.valoresCalculadora.ticket/1e6).toFixed(1) + 'MM, ' + p.valoresCalculadora.trans + ' trans, ' + p.valoresCalculadora.team + ' corretores\n' : '') +
+      'Total de mensagens: ' + p.mensagensTotal + '\n\n' +
+      'CLASSIFICAÇÃO\n' +
+      'Nível de interesse: ' + p.nivelInteresse + '\n' +
+      'Perfil tecnológico: ' + p.nivelTecnologia + '\n' +
+      'Potencial estimado: ' + p.potencialEstimado + '\n\n' +
+      'RECOMENDAÇÃO\n' + recText + '\n' +
+      '═══════════════════════════════════════════';
+  }
+
+  // Dossier modal
+  const dossierOverlay = document.getElementById('dossierOverlay');
+  const dossierContent = document.getElementById('dossierContent');
+  const dossierCloseBtn = document.getElementById('dossierClose');
+
+  function showDossier() {
+    dossierContent.textContent = generateDossier();
+    dossierOverlay.classList.add('open');
+  }
+  function hideDossier() { dossierOverlay.classList.remove('open'); }
+
+  dossierCloseBtn.addEventListener('click', hideDossier);
+  dossierOverlay.addEventListener('click', e => { if (e.target === dossierOverlay) hideDossier(); });
+
+})();
+</script>
+</body>
+</html>
