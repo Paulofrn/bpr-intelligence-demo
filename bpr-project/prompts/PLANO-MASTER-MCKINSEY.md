@@ -1,7 +1,7 @@
 # BPR Intelligence — Plano Master: Pacote Padrão McKinsey
 ## Execução Sequencial AIOS + Validação Cowork
 
-**Data:** 24/02/2026 (v2 — com separação Venda vs Entrega)
+**Data:** 25/02/2026 (v3 — com Etapa 2B: Pitch HTML interativo)
 **Objetivo:** Produzir o pacote executivo completo no padrão de grande consultoria (McKinsey/BCG/Bain), separando claramente o material de VENDA (pré-compra) do material de ENTREGA (pós-compra).
 **Método:** AIOS executa → Cowork valida → Paulo aprova → próxima etapa
 
@@ -85,9 +85,10 @@
 | # | Entregável | Momento | Status | Ação |
 |---|-----------|---------|--------|------|
 | 01 | Executive Summary 1-Pager | VENDA | ❌ Criar | Último (precisa dos números fechados) |
-| 02 | Pitch Deck PPTX (~25 slides) | VENDA | ❌ Criar | Prioridade 1 — arma da reunião |
+| 02 | Pitch Deck PPTX (~25 slides) | VENDA | ✅ Feito (Etapa 2) | 25 slides, 500KB, speaker notes |
+| 02B | **Pitch HTML Interativo + Aria** | **VENDA** | **❌ Criar** | **Substitui PPTX — apresentação que É o produto** |
 | 03 | Financial Model XLSX (8 abas) | VENDA + ENTREGA | ❌ Criar | Prioridade 2 — fecha venda ao vivo |
-| 04 | Blueprint Estratégico DOCX | ENTREGA | ✅ Existe (80p) | Revisar claims, tom, remover seção investidor |
+| 04 | Blueprint Estratégico DOCX | ENTREGA | ✅ Revisado (Etapa 1+1B) | Claims verificados, fontes adicionadas |
 | 05 | Technical Implementation Guide | ENTREGA | ❌ Criar | ~60 páginas — gap mais crítico |
 | 06 | Showcase HTML + Aria | VENDA | ✅ Live | Ajustes de consistência |
 | 07 | Aria System (Supabase + Admin) | ENTREGA | ⚠️ Parcial | Deploy Supabase, testar e2e |
@@ -110,15 +111,20 @@
 ═══════════════════════════════════════════════════════════
   BLOCO A — BASE (calibrar números)
 ═══════════════════════════════════════════════════════════
-  ETAPA 1 → Revisão Blueprint DOCX
+  ETAPA 1 → Revisão Blueprint DOCX                          ✅ DONE
              AIOS executa → Cowork valida → Paulo aprova
 
 ═══════════════════════════════════════════════════════════
   BLOCO B — MATERIAL DE VENDA (o que você precisa para
             marcar e fechar a primeira reunião)
 ═══════════════════════════════════════════════════════════
-  ETAPA 2 → Pitch Deck PPTX (~25 slides)
+  ETAPA 2 → Pitch Deck PPTX (~25 slides)                    ✅ DONE
              AIOS executa → Cowork valida → Paulo aprova
+
+  ETAPA 2B → Pitch HTML Interativo + Aria (substitui PPTX)  ← PRÓXIMA
+             AIOS executa → Cowork valida → Paulo aprova
+             Link com senha | 15 seções | Aria chatbot embutida
+             Sem preço | Com arquitetura + implementação
 
   ETAPA 3 → Financial Model XLSX (8 abas)
              AIOS executa → Cowork valida → Paulo aprova
@@ -226,6 +232,44 @@
 - [ ] PDF backup
 
 **Prompt:** `PROMPT-ETAPA2-PITCH-DECK.md`
+
+---
+
+### ETAPA 2B — PITCH HTML INTERATIVO + ARIA (Substitui PPTX)
+**Bloco:** B (Venda) | **Estimativa:** 1-2 sessões AIOS (~3h)
+
+**Objetivo:** Substituir o PPTX estático por uma apresentação HTML interativa que demonstra a capacidade tecnológica da BPR enquanto apresenta a proposta. A apresentação É o produto.
+
+**Decisões de design:**
+- **Acesso:** Link com senha (`bpr2026`) — reforça exclusividade
+- **Navegação:** Dual mode — slides (teclado ← →) + scroll (mouse)
+- **Aria:** Chatbot contextual standalone (sem backend, respostas pré-mapeadas por keyword matching)
+- **Preço:** ZERO menção — discutido verbalmente na reunião
+- **Arquitetura:** Diagrama visual da stack (4 camadas)
+- **Implementação:** Timeline 90 dias (4 fases visuais)
+- **Entregáveis:** Seção "O Que Você Recebe" com 3 colunas
+
+**Mudanças vs PPTX (Etapa 2):**
+- REMOVIDO: TAM/SAM/SOM (slide 13), Unit Economics (slide 15), Competitivo detalhado (slide 17), Pricing (slide 21)
+- ADICIONADO: Legal Intelligence (faltava!), case studies concretos do site, seção Arquitetura, seção O Que Você Recebe, Timeline 90 dias, Exclusividade Territorial
+- REFORMULADO: Diagnóstico usa frases do CEO ("Minha receita é uma montanha-russa") em vez de dados frios
+- UNIFICADO: Nomes das ferramentas = Crystal Ball, Digital Twin, Legal Intelligence, Negotiation Engine, Client Retention
+
+**15 seções:**
+1. Capa | 2. Diagnóstico (6 dores) | 3. Transformação | 4. Crystal Ball | 5. Digital Twin | 6. Legal Intelligence | 7. Negotiation Engine | 8. Client Retention | 9. Impacto (before/after) | 10. Vantagem Competitiva | 11. Arquitetura | 12. O Que Você Recebe | 13. Implementação 90 dias | 14. Exclusividade | 15. Próximo Passo + Aria
+
+**Critérios de aprovação:**
+- [ ] 15 seções conforme spec
+- [ ] Password gate funcional
+- [ ] Navegação teclado + scroll
+- [ ] Aria responde 12+ tópicos
+- [ ] Zero menção a preço
+- [ ] Legal Intelligence presente
+- [ ] Funciona abrindo HTML direto (file://)
+- [ ] Design dark/gold/cyan consistente com site
+- [ ] Responsivo (desktop + tablet + mobile)
+
+**Prompt:** `PROMPT-ETAPA2B-PITCH-HTML.md`
 
 ---
 
@@ -365,16 +409,18 @@ Organizar todos os arquivos na estrutura profissional definida acima.
 
 ## RESUMO EXECUTIVO
 
-| Etapa | Entregável | Bloco | Sessões AIOS | Para quê |
-|-------|-----------|-------|-------------|----------|
-| 1 | Blueprint DOCX (revisão) | A — Base | 1 | Calibrar números-base |
-| 2 | Pitch Deck PPTX | B — Venda | 1 | Reunião presencial |
-| 3 | Financial Model XLSX | B — Venda | 1 | Fechar venda ao vivo |
-| 4 | Executive Summary PDF | B — Venda | 0.5 | Enviar ao CEO/sócio |
-| 5 | Aria System (completar) | C — Infra | 1 | Leads 24/7 |
-| 6 | Tech Implementation Guide | D — Entrega | 2 | Software house executar |
-| 7 | Data Room + QA | E — Final | 1 | Empacotamento |
-| **TOTAL** | | | **7.5 sessões** | **~16-18 horas** |
+| Etapa | Entregável | Bloco | Sessões AIOS | Status |
+|-------|-----------|-------|-------------|--------|
+| 1 | Blueprint DOCX (revisão) | A — Base | 1 | ✅ Done |
+| 1B | Correção claims c/ dados verificados | A — Base | 0.5 | ✅ Done |
+| 2 | Pitch Deck PPTX | B — Venda | 1 | ✅ Done |
+| **2B** | **Pitch HTML Interativo + Aria** | **B — Venda** | **1-2** | **← PRÓXIMA** |
+| 3 | Financial Model XLSX | B — Venda | 1 | ❌ Pendente |
+| 4 | Executive Summary PDF | B — Venda | 0.5 | ❌ Pendente |
+| 5 | Aria System (completar) | C — Infra | 1 | ❌ Pendente |
+| 6 | Tech Implementation Guide | D — Entrega | 2 | ❌ Pendente |
+| 7 | Data Room + QA | E — Final | 1 | ❌ Pendente |
+| **TOTAL** | | | **~9 sessões** | **3 done, 6 restantes** |
 
 **Com as Etapas 1-4 prontas, Paulo pode marcar a primeira reunião com um CEO.**
 **Com a Etapa 5, a Aria qualifica leads 24/7 no showcase.**
@@ -384,5 +430,6 @@ Organizar todos os arquivos na estrutura profissional definida acima.
 
 ## PRÓXIMO PASSO
 
-Etapa 1 aprovada. Prompt `PROMPT-ETAPA1-REVISAO-BLUEPRINT.md` pronto.
-Paulo cola no AIOS → AIOS executa → Cowork valida → Etapa 2.
+**Etapa 2B** — Pitch HTML Interativo + Aria.
+Prompt `PROMPT-ETAPA2B-PITCH-HTML.md` pronto (22KB, 15 seções especificadas).
+Paulo cola no AIOS → AIOS executa → Cowork valida → Etapa 3.

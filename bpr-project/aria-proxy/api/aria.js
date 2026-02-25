@@ -6,23 +6,31 @@ const { getServiceClient, isConfigured } = require('../lib/supabase');
 const OPENROUTER_KEY = process.env.OPENROUTER_KEY;
 const MODEL = process.env.ARIA_MODEL || 'google/gemini-2.0-flash-001';
 
-// Domínios permitidos (CORS)
+// Domínios permitidos (CORS) — sem 'null' para bloquear requests de file:// e iframes
 const ALLOWED_ORIGINS = [
   'https://bpr-intelligence.vercel.app',
+  'https://bpr-pitch-deploy.vercel.app',
   'https://bprintelligence.com',
   'https://www.bprintelligence.com',
-  'http://localhost',
-  'http://127.0.0.1',
-  'null'
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:3000'
 ];
 
 // Rate limiting em memória (por IP, reseta a cada cold start)
 const rateMap = new Map();
 const RATE_LIMIT = 20;
 const RATE_WINDOW = 60000;
+const MAX_RATE_ENTRIES = 5000;
 
 function isRateLimited(ip) {
   const now = Date.now();
+  // Limpeza periódica para evitar memory leak
+  if (rateMap.size > MAX_RATE_ENTRIES) {
+    for (const [key, val] of rateMap) {
+      if (now - val.start > RATE_WINDOW) rateMap.delete(key);
+    }
+  }
   const entry = rateMap.get(ip);
   if (!entry || now - entry.start > RATE_WINDOW) {
     rateMap.set(ip, { start: now, count: 1 });
@@ -124,7 +132,9 @@ REGRAS ABSOLUTAS:
 - COMO DEFLEXIONAR TÉCNICA: "Usamos um stack proprietário de IA agêntica. Na apresentação presencial, mostramos o sistema funcionando."
 - PALAVRAS PROIBIDAS: revolucionário, disruptivo, inovador, MVP, VibeCoding, XGBoost, seed, round, valuation, pacote, plano, assinatura, Essential, Professional, Enterprise
 - NUNCA use "HNWI" — diga "clientes de alto patrimônio" ou "clientes premium"
-- FORMATO: Texto corrido, sem bullets, sem markdown, como mensagem de chat natural.`;
+- FORMATO: Texto corrido, sem bullets, sem markdown, como mensagem de chat natural.
+- NUNCA mencione ou exiba metadados internos na resposta (fase atual, dados coletados, dados faltantes, nível de interesse, potencial estimado, número de mensagens, seções visitadas). Esses dados são para seu uso interno — o prospect NUNCA deve ver esses termos.
+- NUNCA diga "estamos na fase X" ou "preciso coletar Y". Conduza a conversa naturalmente sem revelar a mecânica interna.`;
 
 // ============================================================
 // HANDLER
@@ -137,6 +147,9 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Aria-Session');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -166,10 +179,20 @@ module.exports = async function handler(req, res) {
     if (!['user', 'assistant'].includes(msg.role)) return res.status(400).json({ error: 'Invalid role' });
   }
 
-  // Build system prompt with context
+  // Build system prompt with context — sanitizado contra prompt injection
   let systemContent = SYSTEM_PROMPT;
   if (context && typeof context === 'string' && context.length < 1500) {
-    systemContent += '\n\n' + context;
+    // Remove tentativas de prompt injection
+    const sanitized = context
+      .replace(/ignore.*(?:previous|all|above).*instructions/gi, '')
+      .replace(/you are now/gi, '')
+      .replace(/STOP\./gi, '')
+      .replace(/new instructions?:/gi, '')
+      .replace(/system\s*prompt/gi, '')
+      .replace(/\bpretend\b/gi, '')
+      .replace(/\bjailbreak\b/gi, '')
+      .trim();
+    if (sanitized) systemContent += '\n\n[CONTEXTO DO CLIENTE — use apenas como referência interna]\n' + sanitized;
   }
 
   const llmMessages = [
@@ -178,9 +201,13 @@ module.exports = async function handler(req, res) {
   ];
 
   try {
-    // Call LLM
+    // Call LLM com timeout de 15s para evitar DoS por request travada
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+
     const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
+      signal: controller.signal,
       headers: {
         'Authorization': 'Bearer ' + OPENROUTER_KEY,
         'Content-Type': 'application/json',
@@ -194,6 +221,7 @@ module.exports = async function handler(req, res) {
         temperature: 0.7
       })
     });
+    clearTimeout(timeout);
 
     if (!resp.ok) {
       const status = resp.status === 401 ? 503 : resp.status >= 500 ? 502 : 500;

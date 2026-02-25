@@ -3,22 +3,30 @@
 
 const { getServiceClient, isConfigured } = require('../lib/supabase');
 
+// Domínios permitidos (CORS) — sem 'null' para bloquear requests de file:// e iframes
 const ALLOWED_ORIGINS = [
   'https://bpr-intelligence.vercel.app',
+  'https://bpr-pitch-deploy.vercel.app',
   'https://bprintelligence.com',
   'https://www.bprintelligence.com',
-  'http://localhost',
-  'http://127.0.0.1',
-  'null'
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:3000'
 ];
 
-// Rate limiting
+// Rate limiting com cleanup para evitar memory leak
 const rateMap = new Map();
 const RATE_LIMIT = 60;
 const RATE_WINDOW = 60000;
+const MAX_RATE_ENTRIES = 5000;
 
 function isRateLimited(ip) {
   const now = Date.now();
+  if (rateMap.size > MAX_RATE_ENTRIES) {
+    for (const [key, val] of rateMap) {
+      if (now - val.start > RATE_WINDOW) rateMap.delete(key);
+    }
+  }
   const entry = rateMap.get(ip);
   if (!entry || now - entry.start > RATE_WINDOW) {
     rateMap.set(ip, { start: now, count: 1 });
@@ -41,6 +49,9 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Aria-Session');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });

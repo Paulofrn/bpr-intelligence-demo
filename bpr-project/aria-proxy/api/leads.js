@@ -4,14 +4,15 @@
 const { getServiceClient, isConfigured, SUPABASE_URL, SUPABASE_ANON_KEY } = require('../lib/supabase');
 const { createClient } = require('@supabase/supabase-js');
 
+// Domínios permitidos (CORS) — sem 'null' para bloquear requests de file:// e iframes
 const ALLOWED_ORIGINS = [
   'https://bpr-intelligence.vercel.app',
   'https://bprintelligence.com',
   'https://www.bprintelligence.com',
   'https://bpr-aria-proxy.vercel.app',
-  'http://localhost',
-  'http://127.0.0.1',
-  'null'
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:3000'
 ];
 
 // Verify JWT from Supabase Auth and return user
@@ -38,6 +39,9 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (!isConfigured()) return res.status(503).json({ error: 'Service not configured' });
@@ -49,10 +53,16 @@ module.exports = async function handler(req, res) {
   const supabase = getServiceClient();
   if (!supabase) return res.status(503).json({ error: 'Database unavailable' });
 
-  // Parse query params
+  // Parse query params com validação
   const url = new URL(req.url, `https://${req.headers.host}`);
   const leadId = url.searchParams.get('id');
   const action = url.searchParams.get('action');
+
+  // Validar formato UUID do leadId para evitar injection
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (leadId && !UUID_RE.test(leadId)) {
+    return res.status(400).json({ error: 'Invalid lead ID format' });
+  }
 
   try {
     // GET single lead with full details
@@ -111,7 +121,9 @@ module.exports = async function handler(req, res) {
       if (status) query = query.eq('status', status);
       if (minScore) query = query.gte('lead_score', parseInt(minScore));
       if (search) {
-        query = query.or(`nome.ilike.%${search}%,email.ilike.%${search}%,empresa.ilike.%${search}%`);
+        // Escapar caracteres especiais de LIKE (%, _) para evitar injection
+        const escaped = search.replace(/[%_\\]/g, '\\$&').slice(0, 100);
+        query = query.or(`nome.ilike.%${escaped}%,email.ilike.%${escaped}%,empresa.ilike.%${escaped}%`);
       }
 
       const { data, count, error } = await query;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://bpr-aria-proxy.vercel.app https://*.supabase.co; img-src 'self' data:; frame-ancestors 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://bpr-aria-proxy.vercel.app; img-src 'self' data:; frame-ancestors 'none'; upgrade-insecure-requests">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <title>BPR Intelligence | Da imobiliária que vende imóvel para a imobiliária que pensa</title>
   <meta name="description" content="BPR Intelligence — Ecossistema de Inteligência Artificial para imobiliárias premium. Cinco ferramentas que transformam dados em vantagem competitiva permanente.">
@@ -241,9 +241,41 @@
       .p-8{padding:20px}
       .p-10{padding:24px}
     }
+
+    /* ========== PASSWORD GATE ========== */
+    #password-gate{position:fixed;inset:0;z-index:10002;background:radial-gradient(ellipse at center,#0d0d0d 0%,#070a12 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease}
+    #password-gate.fade-out{opacity:0;pointer-events:none}
+    .gate-logo{margin-bottom:40px;text-align:center}
+    .gate-logo .gate-bpr{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--bpr-gold)}
+    .gate-logo .gate-intel{font-family:'Inter',sans-serif;font-size:22px;font-weight:300;color:#e0e0e0;display:block;letter-spacing:4px;margin-top:4px}
+    .gate-lock{width:40px;height:40px;margin-bottom:32px}
+    .gate-text{color:var(--bpr-gray-light);font-size:16px;margin-bottom:8px}
+    .gate-subtext{color:var(--bpr-gray);font-size:14px;margin-bottom:24px}
+    #password-input{background:rgba(21,21,21,0.8);border:1px solid rgba(201,176,55,0.2);border-radius:8px;padding:14px 20px;width:300px;color:#fff;font-size:16px;text-align:center;outline:none;font-family:'Inter',sans-serif;transition:border-color .3s}
+    #password-input:focus{border-color:var(--bpr-gold)}
+    #password-input.shake{animation:gateShake .5s ease}
+    #gate-error{color:#e55;font-size:14px;margin-top:12px;min-height:20px;opacity:0;transition:opacity .3s}
+    #gate-error.show{opacity:1}
+    @keyframes gateShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
   </style>
 </head>
 <body>
+
+<!-- PASSWORD GATE -->
+<div id="password-gate">
+  <div class="gate-logo">
+    <svg class="gate-lock" viewBox="0 0 24 24" fill="none" stroke="#c9b037" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <span class="gate-bpr">BPR</span>
+    <span class="gate-intel">Intelligence</span>
+  </div>
+  <p class="gate-text">Acesso restrito a decisores qualificados</p>
+  <p class="gate-subtext">Insira o código fornecido pelo seu consultor BPR</p>
+  <input type="password" id="password-input" placeholder="Código de acesso" autocomplete="off" autofocus>
+  <p id="gate-error">Código inválido</p>
+</div>
+
+<!-- MAIN CONTENT (hidden until password) -->
+<div id="main-content" style="display:none">
 
 <!-- Skip to content -->
 <a href="#diagnostico" class="skip-link">Ir para o conteúdo</a>
@@ -671,13 +703,15 @@
   <p style="margin-top:8px">&copy; 2026 BPR Intelligence. Todos os direitos reservados.</p>
 </footer>
 
+</div><!-- /main-content -->
+
 <!-- ============================================================ -->
 <!-- SEÇÃO 13: ARIA — Assistente Inteligente BPR (Chat Flutuante) -->
 <!-- ============================================================ -->
 
 <!-- Toggle Button -->
-<button class="aria-toggle has-unread" id="ariaToggle" aria-label="Abrir assistente Aria" title="Falar com a Aria">A</button>
-<div class="aria-hint" id="ariaHint"><span class="aria-hint-text">Pergunte à Aria</span><span class="aria-hint-arrow">›</span></div>
+<button class="aria-toggle has-unread" id="ariaToggle" aria-label="Abrir assistente Aria" title="Falar com a Aria" style="display:none">A</button>
+<div class="aria-hint" id="ariaHint" style="display:none"><span class="aria-hint-text">Pergunte à Aria</span><span class="aria-hint-arrow">›</span></div>
 
 <!-- Chat Panel -->
 <div class="aria-panel" id="ariaPanel" role="dialog" aria-label="Chat com Aria, assistente BPR Intelligence">
@@ -710,6 +744,40 @@
 <!-- SCRIPTS -->
 <!-- ============================================================ -->
 <script>
+/* ==========================================================
+   PASSWORD GATE
+   ========================================================== */
+(function() {
+  var PASSWORD = 'bpr2026';
+  var gate = document.getElementById('password-gate');
+  var pwInput = document.getElementById('password-input');
+  var gateError = document.getElementById('gate-error');
+  var mainContent = document.getElementById('main-content');
+  var ariaToggle = document.getElementById('ariaToggle');
+  var ariaHint = document.getElementById('ariaHint');
+
+  pwInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPw();
+  });
+
+  function checkPw() {
+    if (pwInput.value === PASSWORD) {
+      gate.classList.add('fade-out');
+      setTimeout(function() {
+        gate.style.display = 'none';
+        mainContent.style.display = 'block';
+        if (ariaToggle) ariaToggle.style.display = 'flex';
+        if (ariaHint) ariaHint.style.display = 'flex';
+      }, 600);
+    } else {
+      pwInput.classList.add('shake');
+      gateError.classList.add('show');
+      setTimeout(function() { pwInput.classList.remove('shake'); }, 500);
+      setTimeout(function() { gateError.classList.remove('show'); }, 3000);
+    }
+  }
+})();
+
 /* ==========================================================
    PROTEÇÕES ANTI-CLONE
    ========================================================== */
@@ -847,7 +915,13 @@ sectionIds.forEach(id => {
   const TRACK_API = 'https://bpr-aria-proxy.vercel.app/api/track';
 
   /* --- SessionId persistente (localStorage — sobrevive ao fechar tab) --- */
-  function uuid() { return 'xxxx-xxxx-xxxx-xxxx'.replace(/x/g, () => (Math.random()*16|0).toString(16)); }
+  function uuid() {
+    if (crypto && crypto.randomUUID) return crypto.randomUUID();
+    const a = new Uint8Array(16); crypto.getRandomValues(a);
+    a[6] = (a[6] & 0x0f) | 0x40; a[8] = (a[8] & 0x3f) | 0x80;
+    const h = Array.from(a, b => b.toString(16).padStart(2, '0')).join('');
+    return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20);
+  }
   function getSessionId() {
     let sid = null;
     try { sid = localStorage.getItem('bpr_sid'); } catch(e) {}
@@ -908,6 +982,41 @@ sectionIds.forEach(id => {
 
   // Track page view
   trackEvent('page_view', { url: location.pathname, referrer: document.referrer });
+
+  /* --- Scroll Depth Tracking --- */
+  let maxScrollDepth = 0;
+  const scrollDepthSent = {};
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h <= 0) return;
+    const pct = Math.round((window.scrollY / h) * 100);
+    if (pct > maxScrollDepth) maxScrollDepth = pct;
+    [25, 50, 75, 100].forEach(m => {
+      if (maxScrollDepth >= m && !scrollDepthSent[m]) {
+        scrollDepthSent[m] = true;
+        trackEvent('scroll_depth', { depth: m, source: 'showcase' });
+      }
+    });
+  });
+
+  /* --- Time on Page Tracking --- */
+  const pageLoadTime = Date.now();
+  function sendTimeOnPage() {
+    const seconds = Math.floor((Date.now() - pageLoadTime) / 1000);
+    if (seconds > 5) trackEvent('time_on_page', { seconds, sections_viewed: P.secoesVisitadas.length, source: 'showcase' });
+  }
+  window.addEventListener('beforeunload', sendTimeOnPage);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sendTimeOnPage(); });
+
+  /* --- CTA Click Tracking --- */
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.cta-btn, .cta-main, [data-cta]');
+    if (btn) {
+      const label = btn.textContent.trim().substring(0, 50);
+      const section = btn.closest('section');
+      trackEvent('cta_click', { label, section: section ? section.id : 'unknown', source: 'showcase' });
+    }
+  });
 
   /* --- Fase da conversa (auto-calculada) --- */
   function updateFase() {
@@ -982,12 +1091,20 @@ sectionIds.forEach(id => {
     }
     lastSent = now;
 
-    P.mensagensTotal++;
-    P.perguntasFeitas.push(userMsg.slice(0, 200));
+    const isSystemMsg = userMsg.startsWith('[SISTEMA:');
+    if (!isSystemMsg) {
+      P.mensagensTotal++;
+      P.perguntasFeitas.push(userMsg.slice(0, 200));
+    }
     updateFase();
 
-    conversationHistory.push({ role: 'user', content: userMsg });
-    const messages = conversationHistory.slice(-20);
+    let ctx = buildContext();
+    if (isSystemMsg) {
+      ctx += '\n' + userMsg;
+    } else {
+      conversationHistory.push({ role: 'user', content: userMsg });
+    }
+    const messages = conversationHistory.length > 0 ? conversationHistory.slice(-20) : [{ role: 'user', content: 'Olá' }];
 
     try {
       const resp = await fetch(ARIA_API, {
@@ -998,7 +1115,7 @@ sectionIds.forEach(id => {
         },
         body: JSON.stringify({
           messages,
-          context: buildContext(),
+          context: ctx,
           sessionId: SESSION_ID,
           fields: buildFields()
         })
@@ -1013,7 +1130,7 @@ sectionIds.forEach(id => {
       const reply = data.reply || 'Desculpe, não consegui processar. Pode reformular?';
 
       conversationHistory.push({ role: 'assistant', content: reply });
-      extractProspectData(userMsg);
+      if (!isSystemMsg) extractProspectData(userMsg);
       extractProspectDataFromReply(reply);
 
       if (P.mensagensTotal >= 7) { P.nivelInteresse = 'pronto'; P.potencialEstimado = 'alto'; }
