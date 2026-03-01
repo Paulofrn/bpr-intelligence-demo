@@ -23,6 +23,9 @@ Thumbs.db
 .idea/
 *.swp
 
+# Test Coverage
+coverage/
+
 # AIOS Local (AIOS)
 .aios-core/local/
 .claude/settings.local.json
