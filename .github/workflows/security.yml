@@ -1,0 +1,60 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Mondays at 9:00 UTC
+    - cron: '0 9 * * 1'
+
+jobs:
+  audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit root dependencies
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Audit generator dependencies
+        run: cd bpr-project/src && npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Check for secrets in code
+        run: |
+          echo "Scanning for potential secrets..."
+          PATTERNS=(
+            'AKIA[0-9A-Z]{16}'          # AWS Access Key
+            'sk-[a-zA-Z0-9]{20,}'       # OpenAI/Stripe key
+            'ghp_[a-zA-Z0-9]{36}'       # GitHub PAT
+            'password\s*=\s*["\x27][^"\x27]+'  # Hardcoded passwords
+          )
+          FOUND=0
+          for pattern in "${PATTERNS[@]}"; do
+            if grep -rn --include="*.js" --include="*.json" --include="*.yml" --include="*.yaml" \
+               --exclude-dir=node_modules --exclude-dir=.git \
+               -E "$pattern" . 2>/dev/null; then
+              echo "WARNING: Potential secret found matching pattern: $pattern"
+              FOUND=1
+            fi
+          done
+          if [ $FOUND -eq 1 ]; then
+            echo "::warning::Potential secrets detected in codebase"
+          else
+            echo "No secrets detected"
+          fi
