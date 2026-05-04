@@ -13,7 +13,7 @@
     "lint:fix": "eslint bpr-project/src/ --ext .js --fix"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
+    "eslint": "^10.3.0",
     "jest": "^30.2.0"
   },
   "dependencies": {
